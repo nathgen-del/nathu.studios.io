@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nath Web Studio | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="scroll-progress" class="scroll-progress"></div>
+    <div id="boot-screen" class="boot-screen">
+        <div class="terminal-content">
+            <p class="sys-text">> INITIALIZING NATH_WEB_STUDIO...</p>
+            <p class="sys-text">> SECURE_PROTOCOL: ACTIVE</p>
+            <p class="sys-text">> LOADING CYBERSECURITY_ASSETS... <span
+                    class="loading-bar">[||||||||||||||||||||]</span></p>
+            <h1 class="glitch" data-text="ACCESS GRANTED">ACCESS GRANTED</h1>
+        </div>
+    </div>
+    <header>
+        <h1>Nath Web Studio</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#credentials">Credentials</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- 1. NEW: Hero Landing Section -->
+        <section id="home" class="hero">
+            <canvas id="hero-canvas" class="hero-canvas"></canvas>
+
+            <div class="hero-content">
+                <h2><span id="typewriter"></span><span class="cursor">_</span></h2>
+                <p>Specializing in striking Y2K aesthetics, responsive front-end development, and secure system
+                    practices.</p>
+                <a href="#services" class="btn">Explore My Work</a>
+            </div>
+        </section>
+
+        <section id="about" class="about-bento">
+            <div class="bento-grid">
+
+                <div class="bento-card intro-card">
+                    <h2>Hello, I’m Nath!</h2>
+                    <p>I help people and brands through creativity, technology, and digital skills while pursuing growth
+                        and balance in life. I am a student, creative, and aspiring cybersecurity professional. I am
+                        organized, adaptable, and detail-oriented, and I always strive to give my best in everything I
+                        do.</p>
+                    <br>
+                    <p>I am passionate about technology, design, music, and content creation because I believe
+                        creativity and innovation can inspire people and create opportunities. I want to use my skills
+                        and experience to continue learning, helping others, and building projects that reflect who I
+                        am.</p>
+                </div>
+
+                <div class="bento-card profile-card">
+                    <img src="https://picsum.photos/500/600?random=20" alt="Formal Portrait of Nath">
+                </div>
+
+                <div class="bento-card core-skills-card">
+                    <h3>My Core Skills</h3>
+                    <p>I specialize in graphic design, web design, content creation, and creative digital work,
+                        combining modern aesthetics with technical skills to create visually engaging projects. I create
+                        social media graphics, branding materials, and digital content while also building responsive
+                        websites using HTML, CSS, and JavaScript. I’m passionate about creative storytelling, visual
+                        identity, and continuously learning new tools and technologies.</p>
+
+                    <div class="skill-tags">
+                        <span>Virtual Assistance</span>
+                        <span>Data Entry</span>
+                        <span>Communications</span>
+                        <span>Administrative Support</span>
+                        <span>Email Communication</span>
+                        <span>Artificial Intelligence</span>
+                    </div>
+                </div>
+
+                <div class="bento-card services-list-card">
+                    <h3>Services Offered</h3>
+                    <p class="muted-text">But not limited to:</p>
+                    <ul class="trendy-list">
+                        <li>Graphic Design</li>
+                        <li>Canva & CapCut</li>
+                        <li>HTML/CSS</li>
+                        <li>Social Media Design</li>
+                        <li>Video Editing</li>
+                        <li>Web Design</li>
+                    </ul>
+                </div>
+
+                <!-- Box 5: Tech Stack Icons -->
+                <div class="bento-card tools-card fade-in">
+                    <h3>Creative & Tech Arsenal</h3>
+                    <div class="skills-icons">
+                        <!-- Swapped to placehold.co for reliable dummy images -->
+                        <img src="https://placehold.co/80x80/171717/ccff00?text=HTML" alt="HTML" class="tool-icon">
+                        <img src="https://placehold.co/80x80/171717/ccff00?text=CANVA" alt="Canva" class="tool-icon">
+                        <img src="https://placehold.co/80x80/171717/ccff00?text=CAPCUT" alt="CapCut" class="tool-icon">
+                        <img src="https://placehold.co/80x80/171717/ccff00?text=GEMINI" alt="Gemini AI"
+                            class="tool-icon">
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 2. NEW: Services Section -->
+        <section id="services" class="services">
+            <h2 class="section-title">Capabilities</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>01. Visual & UI Design</h3>
+                    <p>Crafting high-contrast layouts, acid-graphics posters, and modern, intuitive user interfaces.</p>
+                </div>
+                <div class="service-card">
+                    <h3>02. Web Development</h3>
+                    <p>Building responsive, grid-based websites using clean HTML, CSS, and interactive elements.</p>
+                </div>
+                <div class="service-card">
+                    <h3>03. Security & Tech</h3>
+                    <p>Analyzing network structures, configuring environments, and implementing secure architectural
+                        practices.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. UPDATED: Two-Column Layout Wrapper -->
+        <div id="about" class="bottom-layout">
+            <section class="content">
+                <h2>Responsive Architecture</h2>
+                <p>
+                    This webpage automatically adapts to desktop, tablet, and mobile devices using modern CSS Grid and
+                    Flexbox. Resize the window to see the layout shift seamlessly.
+                </p>
+            </section>
+
+            <aside class="sidebar">
+                <h3>Latest News</h3>
+                <p>Currently setting up secure testing environments and experimenting with fresh UI layouts.</p>
+            </aside>
+        </div>
+
+        <section id="certificates" class="certificatebg fade-in">
+            <div class="Certtext">
+                <h2 class="section-title">My Certificates</h2>
+                <p class="certp">These are the verified credentials I have collected so far.</p>
+            </div>
+
+            <div class="options">
+                <div class="option active" style="--optionImage: url('https://picsum.photos/800/600?random=30');">
+                    <div class="shadow-overlay"></div>
+                    <div class="label">
+                        <div class="info">
+                            <div class="main">CompTIA Security+</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="option" style="--optionImage: url('https://picsum.photos/800/600?random=31');">
+                    <div class="shadow-overlay"></div>
+                    <div class="label">
+                        <div class="info">
+                            <div class="main">Security Management</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="option" style="--optionImage: url('https://picsum.photos/800/600?random=32');">
+                    <div class="shadow-overlay"></div>
+                    <div class="label">
+                        <div class="info">
+                            <div class="main">Cybersecurity Threat Intel</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="option" style="--optionImage: url('https://picsum.photos/800/600?random=33');">
+                    <div class="shadow-overlay"></div>
+                    <div class="label">
+                        <div class="info">
+                            <div class="main">Prompt Engineering</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio" class="portfolio">
+            <h2 class="section-title">Selected Works</h2>
+
+            <div class="masonry-gallery">
+                <div class="masonry-item">
+                    <img src="https://picsum.photos/600/800?random=1" alt="Y2K Poster Design">
+                </div>
+
+                <div class="masonry-item">
+                    <iframe width="100%" height="350"
+                        src="https://www.youtube.com/embed/gniKMEEqOJU?controls=0&mute=1&autoplay=1&loop=1"
+                        title="Video Edit Placeholder" frameborder="0" allow="autoplay; encrypted-media"
+                        allowfullscreen></iframe>
+                </div>
+
+                <div class="masonry-item">
+                    <img src="https://picsum.photos/600/900?random=2" alt="Cyber Sigilism Art">
+                </div>
+
+                <div class="masonry-item">
+                    <img src="https://picsum.photos/600/700?random=3" alt="Acid Graphics Poster">
+                </div>
+
+                <div class="masonry-item">
+                    <img src="https://picsum.photos/600/850?random=4" alt="Social Media Layout">
+                </div>
+
+                <div class="masonry-item">
+                    <img src="https://picsum.photos/600/600?random=5" alt="Digital Art Poster">
+                </div>
+
+                <div class="masonry-item">
+                    <img src="https://picsum.photos/600/750?random=6" alt="Y2K Aesthetic Concept">
+                </div>
+
+                <div class="masonry-item">
+                    <img src="https://picsum.photos/600/500?random=7" alt="WARD Sierra AI Interface">
+                </div>
+
+                <div class="masonry-item">
+                    <img src="https://picsum.photos/600/450?random=8" alt="Healthcare UI Food Scanner">
+                </div>
+
+                <div class="masonry-item">
+                    <img src="https://picsum.photos/600/650?random=9" alt="Cyber-sigilism Concept">
+                </div>
+
+                <div class="masonry-item">
+                    <img src="https://picsum.photos/600/800?random=10" alt="Acid Graphics Edit">
+                </div>
+
+                <div class="masonry-item">
+                    <img src="https://picsum.photos/600/550?random=11" alt="Nathsmagnolias Portfolio Asset">
+                </div>
+            </div>
+        </section>
+
+        <section id="video-showcase" class="video-showcase fade-in">
+            <canvas id="video-canvas" class="section-canvas"></canvas>
+
+            <div class="Certtext">
+
+                <section id="video-showcase" class="video-showcase fade-in">
+                    <div class="Certtext">
+                        <h2 class="section-title">Vertical Media Transmissions</h2>
+                        <p class="certp">Short-form content, motion graphics, and social media templates.</p>
+                    </div>
+
+                    <div class="vertical-command-grid">
+                        <div class="video-monitor">
+                            <div class="monitor-bar"><span class="rec-dot"></span> TIKTOK_01</div>
+                            <div class="vertical-iframe-wrapper">
+                                <iframe src="https://player.vimeo.com/video/1195560321?background=1" frameborder="0"
+                                    allow="autoplay; fullscreen" loading="lazy"></iframe>
+                            </div>
+                        </div>
+
+                        <div class="video-monitor">
+                            <div class="monitor-bar"><span class="rec-dot"></span> REELS_02</div>
+                            <div class="vertical-iframe-wrapper">
+                                <iframe src="https://player.vimeo.com/video/1195560322?background=1" frameborder="0"
+                                    allow="autoplay; fullscreen" loading="lazy"></iframe>
+                            </div>
+                        </div>
+
+                        <div class="video-monitor">
+                            <div class="monitor-bar"><span class="rec-dot"></span> SHORTS_03</div>
+                            <div class="vertical-iframe-wrapper">
+                                <iframe src="https://player.vimeo.com/video/1195560820?background=1" frameborder="0"
+                                    allow="autoplay; fullscreen" loading="lazy"></iframe>
+                            </div>
+                        </div>
+
+                        <div class="video-monitor">
+                            <div class="monitor-bar"><span class="rec-dot"></span> EDIT_04</div>
+                            <div class="vertical-iframe-wrapper">
+                                <iframe src="https://player.vimeo.com/video/1195560323?background=1" frameborder="0"
+                                    allow="autoplay; fullscreen" loading="lazy"></iframe>
+                            </div>
+                        </div>
+
+                        <div class="video-monitor">
+                            <div class="monitor-bar"><span class="rec-dot"></span> EDIT_05</div>
+                            <div class="vertical-iframe-wrapper">
+                                <iframe src="https://player.vimeo.com/video/1195560320?background=1" frameborder="0"
+                                    allow="autoplay; fullscreen" loading="lazy"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div id="lightbox" class="lightbox">
+                    <span class="close-lightbox">&times;</span>
+
+                    <button class="nav-arrow prev-arrow">[&larr;] PREV</button>
+
+                    <div class="lightbox-wrapper">
+                        <img class="lightbox-content" id="lightbox-img">
+                    </div>
+
+                    <button class="nav-arrow next-arrow">NEXT [&rarr;]</button>
+                </div>
+
+                <section id="contact" class="contact">
+                    <canvas id="contact-canvas" class="section-canvas"></canvas>
+                    <h2 class="section-title">Initiate Connection</h2>
+
+                    <div class="contact-wrapper">
+                        <form action="https://formspree.io/f/xkoaleey" method="POST" class="contact-form">
+                            <input type="hidden" name="_next" value="https://yourusername.github.io/your-repo/"> //Don't forget to replace with your actual URL
+                            <div class="input-group">
+                                <input type="text" id="name" name="name" required>
+                                <label for="name">Name / Handle</label>
+                            </div>
+
+                            <div class="input-group">
+                                <input type="email" id="email" name="email" required>
+                                <label for="email">Email / Comm-Link</label>
+                            </div>
+
+                            <div class="input-group">
+                                <textarea id="message" name="message" rows="5" required></textarea>
+                                <label for="message">Transmission Data</label>
+                            </div>
+
+                            <button type="submit" class="btn">Send Transmission</button>
+                        </form>
+
+                        <div class="contact-info">
+                            <h3>System Status: <span style="color: var(--accent-acid);">Online</span></h3>
+                            <p>Ready for new deployments, architectural testing, and digital design collaborations.
+                                Reach out to
+                                initiate a secure connection.</p>
+
+                            <ul class="social-links">
+                                <li><a href="#">GitHub</a></li>
+                                <li><a href="#">LinkedIn</a></li>
+                                <li><a href="#">Behance</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Nath Web Studio. All Rights Reserved.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+<button id="global-theme-toggle" class="theme-toggle" aria-label="Toggle System Theme">
+    <div class="toggle-track">
+        <span class="toggle-indicator"></span>
+    </div>
+    <span class="toggle-label">SYSTEM_OVERRIDE</span>
+</button>
+
+</html>
