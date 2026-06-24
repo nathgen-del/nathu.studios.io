@@ -8,12 +8,22 @@
     --border-color: #262626;
 }
 
+html {
+    scroll-behavior: smooth;
+    /* MOVED HERE to prevent global layout lag */
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    scroll-behavior: smooth;
-    /* Enables smooth scrolling when clicking nav links */
+}
+
+/* ==========================================
+   SYSTEM UTILITIES (SCROLL LOCK)
+   ========================================== */
+body.no-scroll {
+    overflow: hidden !important;
 }
 
 body {
@@ -28,6 +38,8 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    overflow-y: auto !important;
+    /* Forces the scrollbar to stay active */
 }
 
 /* --- Typography & Headers --- */
@@ -100,25 +112,46 @@ main {
     display: flex;
     flex-direction: column;
     gap: 5rem;
-    /* Spacing between the major sections */
 }
 
-/* --- Hero Landing Section --- */
+/* ==========================================
+   HERO SECTION (FULL SCREEN FIX)
+   ========================================== */
 .hero {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     text-align: center;
-    min-height: 60vh;
-    padding-top: 4rem;
+    overflow: hidden;
 }
 
 .hero h2 {
     font-size: clamp(2.5rem, 5vw, 4rem);
-    /* Scales text smoothly on mobile */
     color: var(--text-main);
     line-height: 1.1;
     margin-bottom: 1.5rem;
+}
+
+/* ==========================================
+   SECTION SUB-HEADERS (.certp & .Certtext)
+   ========================================== */
+.Certtext {
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+    z-index: 2;
+}
+
+.certp {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    max-width: 650px;
+    margin: 0 auto;
+    line-height: 1.6;
 }
 
 .hero p {
@@ -140,6 +173,7 @@ main {
     text-transform: uppercase;
     letter-spacing: 1px;
     transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .btn:hover {
@@ -149,25 +183,21 @@ main {
 }
 
 /* --- Services Section --- */
-.section-title {
-    text-align: center;
-    font-size: 2rem;
-    margin-bottom: 3rem;
-}
-
+/* --- Services Section --- */
 .services-grid {
     display: grid;
-    /* This automatically creates as many columns as will fit, dropping to 1 on mobile */
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    width: 100%;
 }
 
 .service-card {
     background-color: var(--surface);
-    padding: 2.5rem;
+    padding: 2rem;
     border: 1px solid var(--border-color);
     border-top: 3px solid var(--accent-acid);
     transition: transform 0.3s ease, border-color 0.3s ease;
+    min-height: 360px;
 }
 
 .service-card:hover {
@@ -176,8 +206,26 @@ main {
 }
 
 .service-card h3 {
-    font-size: 1.3rem;
+    font-size: 1.15rem;
     color: var(--text-main);
+}
+
+/* Tablet: 2 cards per row */
+@media (max-width: 1100px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Mobile: 1 card per row */
+@media (max-width: 650px) {
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .service-card {
+        min-height: auto;
+    }
 }
 
 /* --- Two-Column Bottom Layout --- */
@@ -199,6 +247,12 @@ main {
     border-top: 3px solid var(--accent-acid);
 }
 
+@media (min-width: 800px) {
+    .bottom-layout {
+        grid-template-columns: 2.5fr 1fr;
+    }
+}
+
 /* --- Footer --- */
 footer {
     text-align: center;
@@ -214,20 +268,17 @@ footer {
 }
 
 .masonry-gallery {
-    /* Default to 1 column for mobile */
     column-count: 1;
     column-gap: 2rem;
     padding-bottom: 2rem;
 }
 
-/* Tablet Layout */
 @media (min-width: 600px) {
     .masonry-gallery {
         column-count: 2;
     }
 }
 
-/* Desktop Layout */
 @media (min-width: 900px) {
     .masonry-gallery {
         column-count: 3;
@@ -235,10 +286,8 @@ footer {
 }
 
 .masonry-item {
-    /* Prevents an image from being split across two columns */
     break-inside: avoid;
     margin-bottom: 2rem;
-
     background-color: var(--surface);
     border: 1px solid var(--border-color);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
@@ -248,14 +297,11 @@ footer {
 .masonry-item img {
     width: 100%;
     display: block;
-    /* Removes awkward bottom spacing on inline elements */
     height: auto;
     filter: grayscale(80%) contrast(1.2);
-    /* Mutes the images initially */
     transition: filter 0.4s ease;
 }
 
-/* Interactive Hover Effects */
 .masonry-item:hover {
     transform: translateY(-5px);
     border-color: var(--accent-acid);
@@ -263,18 +309,9 @@ footer {
 }
 
 .masonry-item:hover img {
-    /* Reveals the full color on hover */
     filter: grayscale(0%) contrast(1);
 }
 
-/* --- Media Queries (Desktop Layout) --- */
-@media (min-width: 800px) {
-    .bottom-layout {
-        grid-template-columns: 2.5fr 1fr;
-    }
-}
-
-/* --- Iframe Support for Masonry --- */
 .masonry-item iframe {
     width: 100%;
     display: block;
@@ -282,12 +319,11 @@ footer {
     background-color: #000;
 }
 
-/* --- The Lightbox (Hidden by Default) --- */
+/* --- The Lightbox --- */
 .lightbox {
     display: none;
-    /* Hidden until clicked */
     position: fixed;
-    z-index: 999;
+    z-index: 99999;
     top: 0;
     left: 0;
     width: 100%;
@@ -298,17 +334,17 @@ footer {
     justify-content: center;
 }
 
-/* When the .active class is added via JavaScript */
 .lightbox.active {
     display: flex;
 }
 
 .lightbox-content {
-    max-width: 90%;
-    max-height: 90vh;
+    max-width: 100%;
+    max-height: 85vh;
     border: 2px solid var(--accent-acid);
     box-shadow: 0 0 40px rgba(204, 255, 0, 0.15);
     animation: zoomIn 0.3s ease;
+    object-fit: contain;
 }
 
 .close-lightbox {
@@ -336,6 +372,61 @@ footer {
     to {
         opacity: 1;
         transform: scale(1);
+    }
+}
+
+.lightbox-wrapper {
+    position: relative;
+    max-width: 900px;
+    width: 90%;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-arrow {
+    background: rgba(10, 10, 10, 0.8);
+    border: 1px solid var(--accent-acid);
+    color: var(--accent-acid);
+    font-family: monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.nav-arrow:hover {
+    background: var(--accent-acid);
+    color: #000;
+    box-shadow: 0 0 15px rgba(204, 255, 0, 0.4);
+}
+
+.prev-arrow {
+    margin-right: 2rem;
+}
+
+.next-arrow {
+    margin-left: 2rem;
+}
+
+@media (max-width: 768px) {
+    .lightbox {
+        flex-direction: column;
+    }
+
+    .prev-arrow {
+        margin: 1rem 0 0 0;
+        order: 2;
+    }
+
+    .next-arrow {
+        margin: 1rem 0 0 0;
+        order: 3;
+    }
+
+    .lightbox-wrapper {
+        order: 1;
     }
 }
 
@@ -380,13 +471,24 @@ footer {
     }
 }
 
+/* FIX: Mobile padding adjustments for the contact form */
+@media (max-width: 768px) {
+    .contact-wrapper {
+        padding: 1.5rem;
+        gap: 2rem;
+    }
+
+    .contact-info h3 {
+        font-size: 1.2rem;
+    }
+}
+
 .contact-form {
     display: flex;
     flex-direction: column;
     gap: 2.5rem;
 }
 
-/* Floating Label Logic */
 .input-group {
     position: relative;
 }
@@ -421,7 +523,6 @@ footer {
     padding: 0 0.5rem;
 }
 
-/* This pushes the label up when focused OR when text is inside */
 .input-group input:focus~label,
 .input-group input:valid~label,
 .input-group textarea:focus~label,
@@ -432,7 +533,6 @@ footer {
     color: var(--accent-acid);
 }
 
-/* Info Sidebar */
 .contact-info h3 {
     font-size: 1.4rem;
     margin-bottom: 1rem;
@@ -459,79 +559,6 @@ footer {
     color: var(--accent-acid);
 }
 
-
-
-/* --- Lightbox Sizing Fixes & Controls --- */
-.lightbox-wrapper {
-    position: relative;
-    max-width: 900px;
-    /* Caps the size so it doesn't get too big on desktop */
-    width: 90%;
-    display: flex;
-    justify-content: center;
-}
-
-/* Override previous lightbox-content sizing */
-.lightbox-content {
-    max-width: 100%;
-    max-height: 85vh;
-    border: 2px solid var(--accent-acid);
-    box-shadow: 0 0 40px rgba(204, 255, 0, 0.15);
-    animation: zoomIn 0.3s ease;
-    object-fit: contain;
-    /* Ensures the certificate proportions stay perfect */
-}
-
-/* Terminal Navigation Arrows */
-.nav-arrow {
-    background: rgba(10, 10, 10, 0.8);
-    border: 1px solid var(--accent-acid);
-    color: var(--accent-acid);
-    font-family: monospace;
-    font-size: 1rem;
-    font-weight: 700;
-    padding: 0.75rem 1.5rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    z-index: 1000;
-}
-
-.nav-arrow:hover {
-    background: var(--accent-acid);
-    color: #000;
-    box-shadow: 0 0 15px rgba(204, 255, 0, 0.4);
-}
-
-/* Position the arrows on the sides */
-.prev-arrow {
-    margin-right: 2rem;
-}
-
-.next-arrow {
-    margin-left: 2rem;
-}
-
-/* Adjust layout for mobile so arrows sit below the image instead of beside it */
-@media (max-width: 768px) {
-    .lightbox {
-        flex-direction: column;
-    }
-
-    .prev-arrow {
-        margin: 1rem 0 0 0;
-        order: 2;
-    }
-
-    .next-arrow {
-        margin: 1rem 0 0 0;
-        order: 3;
-    }
-
-    .lightbox-wrapper {
-        order: 1;
-    }
-}
-
 /* --- About / Bento Grid Section --- */
 .about-bento {
     padding-top: 2rem;
@@ -540,7 +567,6 @@ footer {
 
 .bento-grid {
     display: grid;
-    /* 12-column grid gives us total control over asymmetrical sizing */
     grid-template-columns: repeat(12, 1fr);
     gap: 1.5rem;
 }
@@ -557,7 +583,6 @@ footer {
     border-color: rgba(204, 255, 0, 0.3);
 }
 
-/* Specific Card Spans for Desktop */
 .intro-card {
     grid-column: span 8;
 }
@@ -588,7 +613,6 @@ footer {
     gap: 1.5rem;
 }
 
-/* Formal Portrait Styling */
 .profile-card img {
     width: 100%;
     height: 100%;
@@ -602,7 +626,6 @@ footer {
     transform: scale(1.05);
 }
 
-/* Trendy Pill Tags for Soft Skills */
 .skill-tags {
     display: flex;
     flex-wrap: wrap;
@@ -615,7 +638,6 @@ footer {
     color: var(--text-muted);
     padding: 0.4rem 1rem;
     border-radius: 50px;
-    /* Makes them pill-shaped */
     font-size: 0.85rem;
     font-weight: 600;
     transition: all 0.3s ease;
@@ -627,7 +649,6 @@ footer {
     background: rgba(204, 255, 0, 0.05);
 }
 
-/* Custom Checkmark List */
 .muted-text {
     color: var(--text-muted);
     font-size: 0.9rem;
@@ -656,14 +677,16 @@ footer {
     font-weight: bold;
 }
 
-/* Tools & Icons Row */
 .tools-card h3 {
     margin-bottom: 0;
 }
 
+/* FIX: Wrapped tools card elements for mobile responsiveness */
 .skills-icons {
     display: flex;
     gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .tool-icon {
@@ -677,7 +700,6 @@ footer {
     transform: translateY(-5px);
 }
 
-/* Responsive Design for Tablets and Mobile */
 @media (max-width: 900px) {
 
     .intro-card,
@@ -689,7 +711,6 @@ footer {
 
     .profile-card {
         aspect-ratio: 16 / 9;
-        /* Keeps the image looking good on mobile */
     }
 
     .tools-card {
@@ -698,131 +719,294 @@ footer {
     }
 }
 
-/* ==========================================
-   SCROLL FADE-IN ANIMATION
-   ========================================== */
 .fade-in {
     opacity: 0;
     transform: translateY(40px);
-    /* Pushes it down slightly */
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    /* FIX: !important goes only at the very end of the entire declaration */
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out !important;
     will-change: opacity, transform;
-    /* Performance optimization */
 }
 
-/* This class is added by JavaScript when the user scrolls to the element */
 .fade-in.visible {
     opacity: 1;
     transform: translateY(0);
 }
 
-/* --- Expanding Certificate Accordion --- */
-.certificatebg {
-    padding-top: 2rem;
+/* ==========================================
+   START: UPGRADED CERTIFICATES (DATA MATRIX & LIGHTBOX)
+   ========================================== */
+.cert-matrix {
+    padding-top: 4rem;
     padding-bottom: 4rem;
     max-width: 1200px;
     margin: 0 auto;
     width: 100%;
 }
 
-.Certtext {
-    text-align: center;
-    margin-bottom: 2.5rem;
+.cert-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
 }
 
-.certp {
-    color: var(--text-muted);
-    font-size: 1.1rem;
-}
-
-/* The Accordion Container */
-.options {
-    display: flex;
-    flex-direction: row;
-    /* Horizontal layout for desktop */
-    height: 500px;
-    gap: 1rem;
-    width: 100%;
-}
-
-/* Individual Inactive Cards */
-.option {
+/* The Data Card Container */
+.cert-card {
     position: relative;
+    height: 280px;
+    border-radius: 4px;
     overflow: hidden;
-    min-width: 60px;
-    margin: 0;
-    background-image: var(--optionImage);
+    background-image: var(--bg-image);
     background-size: cover;
     background-position: center;
-    border-radius: 8px;
     border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.5rem;
+    transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
     cursor: pointer;
-    flex: 1;
-    /* Small width when inactive */
-    transition: flex 0.6s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.3s ease;
-    /* Optional terminal filter for inactive state */
-    filter: grayscale(80%) sepia(50%) hue-rotate(50deg);
+    /* Lets the user know it is clickable */
 }
 
-.option:hover {
-    border-color: rgba(204, 255, 0, 0.5);
-}
-
-/* The Active (Expanded) Card */
-.option.active {
-    flex: 5;
-    /* Takes up majority of the space */
-    border-color: var(--accent-acid);
-    filter: none;
-    /* Reveals full color */
-    cursor: default;
-}
-
-/* Dark gradient so the text is always readable */
-.shadow-overlay {
+/* The Dark Glass Overlay - Blurs the image so HTML text is readable */
+.cert-overlay {
     position: absolute;
-    bottom: 0;
+    top: 0;
     left: 0;
-    right: 0;
-    height: 120px;
-    background: linear-gradient(0deg, rgba(10, 10, 10, 0.9) 0%, rgba(10, 10, 10, 0) 100%);
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 10, 10, 0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     z-index: 1;
+    transition: background 0.4s ease;
 }
 
-/* Label Styling */
-.label {
-    position: absolute;
-    bottom: 1.5rem;
-    left: 1.5rem;
+/* Hover State */
+.cert-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent-acid);
+    box-shadow: 0 10px 30px rgba(204, 255, 0, 0.1);
+}
+
+.cert-card:hover .cert-overlay {
+    background: rgba(10, 10, 10, 0.85);
+    /* Keeps it dark so text stays readable */
+}
+
+/* Typography & Layout inside the card */
+.cert-header,
+.cert-content {
+    position: relative;
     z-index: 2;
-    opacity: 0;
-    /* Hidden when inactive */
-    transform: translateY(20px);
-    transition: opacity 0.4s ease 0.2s, transform 0.4s ease 0.2s;
-    /* Delayed fade in */
+    transition: transform 0.4s ease;
 }
 
-.option.active .label {
+.cert-card:hover .cert-content {
+    transform: translateY(-10px);
+    /* Slides the text up to make room for the button */
+}
+
+.cert-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cert-status {
+    font-family: monospace;
+    font-size: 0.75rem;
+    color: var(--accent-acid);
+    background: rgba(204, 255, 0, 0.1);
+    padding: 0.3rem 0.6rem;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    letter-spacing: 1px;
+}
+
+.blink-dot {
+    width: 6px;
+    height: 6px;
+    background-color: var(--accent-acid);
+    border-radius: 50%;
+    animation: certBlink 1.5s infinite;
+}
+
+@keyframes certBlink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+.cert-date {
+    font-family: monospace;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.cert-content h3 {
+    color: #fff;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    transition: color 0.3s ease;
+}
+
+.cert-card:hover .cert-content h3 {
+    color: var(--accent-acid);
+}
+
+.cert-barcode {
+    font-family: monospace;
+    color: rgba(255, 255, 255, 0.2);
+    font-size: 1rem;
+    letter-spacing: 2px;
+    user-select: none;
+}
+
+/* The Interactive Action Button */
+.cert-action {
+    font-family: monospace;
+    color: var(--accent-acid);
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+
+.cert-card:hover .cert-action {
     opacity: 1;
     transform: translateY(0);
 }
 
-.info .main {
-    font-weight: 700;
-    font-size: 1.5rem;
-    color: var(--accent-acid);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    background: rgba(0, 0, 0, 0.7);
-    padding: 0.5rem 1rem;
-    border: 1px solid var(--accent-acid);
+/* --- THE FULL SCREEN MODAL VIEWER (UPGRADED) --- */
+.cert-modal {
+    display: none;
+    position: fixed !important;
+    /* Forces it out of the layout */
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    /* Locks to exact screen width */
+    height: 100vh !important;
+    /* Locks to exact screen height */
+    background: rgba(5, 5, 5, 0.85);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    z-index: 999999 !important;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    cursor: zoom-out;
 }
 
-/* Mobile Responsiveness: Switch to a vertical stack on small screens */
-@media (max-width: 768px) {
-    .options {
-        flex-direction: column;
-        height: 600px;
+.cert-modal.active {
+    display: flex !important;
+    /* Overrides the display: none */
+    opacity: 1;
+    animation: zoomIn 0.3s ease forwards;
+}
+
+/* Centers the title and image together */
+.cert-modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    /* Lets background clicks pass through */
+}
+
+/* The New Small Title */
+.cert-modal-title {
+    font-family: monospace;
+    color: var(--accent-acid);
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px rgba(204, 255, 0, 0.4);
+}
+
+/* The Image Wrapper */
+.cert-img-wrapper {
+    position: relative;
+    pointer-events: auto;
+    /* Re-enables clicking for the image */
+    border: 2px solid var(--accent-acid);
+    box-shadow: 0 0 40px rgba(204, 255, 0, 0.15);
+    border-radius: 4px;
+    overflow: hidden;
+    /* Keeps the zoom contained beautifully */
+}
+
+.cert-modal img {
+    display: block;
+    max-width: 90vw;
+    max-height: 75vh;
+    object-fit: contain;
+    cursor: zoom-in;
+    /* Tells user they can click to zoom */
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* THE ZOOM FEATURE */
+.cert-modal img.zoomed {
+    transform: scale(1.6);
+    /* Zooms the image to 160% */
+    cursor: zoom-out;
+}
+
+/* The Close Button & Hover Animation */
+.cert-modal-close {
+    position: absolute;
+    top: 2rem;
+    right: 3rem;
+    font-family: monospace;
+    color: var(--text-main);
+    font-size: 1rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    pointer-events: auto;
+    padding: 0.5rem 1rem;
+    border: 1px dashed transparent;
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+/* When the user moves their mouse anywhere over the dark background, this pulses */
+.cert-modal:hover .cert-modal-close {
+    color: var(--accent-acid);
+    border-color: var(--accent-acid);
+    background: rgba(204, 255, 0, 0.05);
+    animation: pulseClose 2s infinite;
+}
+
+@keyframes pulseClose {
+    0% {
+        box-shadow: 0 0 0 0 rgba(204, 255, 0, 0.4);
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgba(204, 255, 0, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(204, 255, 0, 0);
     }
 }
 
@@ -835,15 +1019,12 @@ footer {
     width: 100%;
 }
 
-/* The 5-Column Grid for Vertical Videos */
 .vertical-command-grid {
     display: grid;
-    /* Automatically fits as many 200px wide videos as possible */
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1.5rem;
 }
 
-/* The Monitor UI Wrapper (Kept from before) */
 .video-monitor {
     background-color: #000;
     border: 1px solid var(--border-color);
@@ -858,10 +1039,8 @@ footer {
     border-color: var(--accent-acid);
     box-shadow: 0 5px 20px rgba(204, 255, 0, 0.15);
     transform: translateY(-5px);
-    /* Adds a slight hover pop */
 }
 
-/* The Tech "Top Bar" */
 .monitor-bar {
     background-color: #111;
     border-bottom: 1px solid var(--border-color);
@@ -898,10 +1077,8 @@ footer {
     }
 }
 
-/* Forcing Iframes to scale to PHONE dimensions */
 .vertical-iframe-wrapper {
     width: 100%;
-    /* 9:16 Aspect Ratio is standard for TikTok/Shorts/Reels */
     aspect-ratio: 9 / 16;
     position: relative;
 }
@@ -913,10 +1090,8 @@ footer {
     width: 100%;
     height: 100%;
     pointer-events: none;
-    /* Prevents accidental pausing on scroll */
 }
 
-/* Responsive: 2 columns on tablet, 1 on small mobile */
 @media (max-width: 600px) {
     .vertical-command-grid {
         grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -926,22 +1101,23 @@ footer {
 /* ==========================================
    CUSTOM NEON CROSSHAIR CURSOR
    ========================================== */
-
-/* Only apply this on devices with a real mouse (Desktops) */
 @media (pointer: fine) {
 
-    /* Hide the boring default browser cursor globally */
+    /* FIX: Added .lightbox, .masonry-item, and UI buttons to the hidden cursor list */
     body,
     a,
     button,
     input,
     textarea,
     .option,
-    .video-monitor {
+    .video-monitor,
+    .masonry-item,
+    .lightbox,
+    .nav-arrow,
+    .close-lightbox {
         cursor: none !important;
     }
 
-    /* 1. The Inner Crosshair */
     .custom-cursor {
         position: fixed;
         top: 0;
@@ -949,12 +1125,13 @@ footer {
         width: 20px;
         height: 20px;
         pointer-events: none;
-        /* Ensures the cursor doesn't block your clicks */
-        z-index: 10000;
+        z-index: 9999999 !important;
+        /* FIX: Boosted above the lightbox layer */
         transform: translate(-50%, -50%);
     }
 
-    /* Building the crosshair lines */
+    /* ... keep your custom-cursor::before and ::after exactly the same ... */
+
     .custom-cursor::before,
     .custom-cursor::after {
         content: '';
@@ -963,7 +1140,6 @@ footer {
         box-shadow: 0 0 8px var(--accent-acid);
     }
 
-    /* Vertical line */
     .custom-cursor::before {
         top: 0;
         left: 9px;
@@ -971,7 +1147,6 @@ footer {
         height: 20px;
     }
 
-    /* Horizontal line */
     .custom-cursor::after {
         top: 9px;
         left: 0;
@@ -979,7 +1154,6 @@ footer {
         height: 2px;
     }
 
-    /* 2. The Outer Trailing Ring */
     .cursor-ring {
         position: fixed;
         top: 0;
@@ -989,12 +1163,12 @@ footer {
         border: 1px solid rgba(204, 255, 0, 0.4);
         border-radius: 50%;
         pointer-events: none;
-        z-index: 9999;
+        z-index: 9999998 !important;
+        /* FIX: Boosted right under the crosshair */
         transform: translate(-50%, -50%);
         transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
     }
 
-    /* 3. The Hover/Targeting State */
     .cursor-ring.hover-active {
         width: 60px;
         height: 60px;
@@ -1003,7 +1177,6 @@ footer {
         border-width: 2px;
         animation: radarSpin 4s linear infinite;
         background-color: rgba(204, 255, 0, 0.05);
-        /* Very faint glow inside */
     }
 
     @keyframes radarSpin {
@@ -1017,183 +1190,228 @@ footer {
     }
 }
 
-body {
-    overflow-y: auto !important;
-    /* Forces the scrollbar to stay active */
-}
-
 /* ==========================================
-   SYSTEM BOOTING SCREEN
+   LOGO DRAW-IN + BRUTALIST SPLIT DOORS
    ========================================== */
-/* ==========================================
-   SYSTEM BOOTING SCREEN (CSS-ONLY VERSION)
-   ========================================== */
-.boot-screen {
+.logo-loader {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: #050505;
     z-index: 999999;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-family: monospace;
-    color: var(--accent-acid);
-
-    /* THE MAGIC: This CSS timer cannot be stopped by broken JavaScript */
-    animation: autoKillBoot 0.8s ease forwards 4.5s;
+    pointer-events: none;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+    /* NEW: Smooth fade out */
 }
 
-/* The exact rules for making it disappear and allowing clicks to pass through */
-@keyframes autoKillBoot {
-    0% {
-        opacity: 1;
-        visibility: visible;
-    }
-
-    100% {
-        opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
-        z-index: -1;
-    }
-}
-
-.terminal-content {
-    width: 80%;
-    max-width: 600px;
-    text-align: left;
-}
-
-.sys-text {
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
-    opacity: 0;
-    animation: typeLine 0.1s forwards;
-}
-
-/* Staggering the appearance of the terminal lines */
-.sys-text:nth-child(1) {
-    animation-delay: 0.2s;
-}
-
-.sys-text:nth-child(2) {
-    animation-delay: 0.6s;
-}
-
-.sys-text:nth-child(3) {
-    animation-delay: 1.0s;
-}
-
-@keyframes typeLine {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
-/* The Glitch Effect Text */
-.glitch {
-    font-size: 3rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    position: relative;
-    margin-top: 2rem;
-    opacity: 0;
-    animation: typeLine 0.1s forwards 1.8s;
-    /* Appears last */
-}
-
-/* Creating the chaotic overlapping layers for the glitch */
-.glitch::before,
-.glitch::after {
-    content: attr(data-text);
+/* --- THE DOORS --- */
+.split-door {
     position: absolute;
     top: 0;
+    width: 50vw;
+    height: 100vh;
+    background-color: #050505;
+    /* UPGRADED: Smoother cubic-bezier so it glides open instead of violently snapping */
+    transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+    z-index: 1;
+}
+
+/* Cleanup class to hide container entirely */
+.logo-loader.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* --- THE DOORS --- */
+.split-door {
+    position: absolute;
+    top: 0;
+    width: 50vw;
+    height: 100vh;
+    background-color: #050505;
+    /* The brutalist snap animation */
+    transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1);
+    z-index: 1;
+}
+
+.door-left {
     left: 0;
-    width: 100%;
-    height: 100%;
-    background: #050505;
 }
 
-.glitch::before {
-    left: 2px;
-    text-shadow: -2px 0 #ff00c1;
-    /* Cyan/Magenta glitch colors */
-    clip: rect(44px, 450px, 56px, 0);
-    animation: glitch-anim 5s infinite linear alternate-reverse;
+.door-right {
+    right: 0;
 }
 
-.glitch::after {
-    left: -2px;
-    text-shadow: -2px 0 #00fff9;
-    clip: rect(44px, 450px, 56px, 0);
-    animation: glitch-anim2 5s infinite linear alternate-reverse;
+/* When the JS triggers the split */
+.logo-loader.split-active .door-left {
+    transform: translateX(-100%);
 }
 
-@keyframes glitch-anim {
+.logo-loader.split-active .door-right {
+    transform: translateX(100%);
+}
+
+/* --- THE LOGO --- */
+.loader-logo-wrapper {
+    position: relative;
+    z-index: 2;
+    transition: opacity 0.3s ease, transform 0.5s cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+/* Logo snaps toward the screen and disappears right as doors open */
+.logo-loader.split-active .loader-logo-wrapper {
+    opacity: 0;
+    transform: scale(2);
+    /* Jumps toward the camera */
+}
+
+.loader-svg {
+    width: 120px;
+    height: 120px;
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.05));
+}
+
+.loader-path {
+    stroke-dasharray: 150;
+    stroke-dashoffset: 150;
+    animation: drawLine 1.5s cubic-bezier(0.8, 0, 0.2, 1) forwards;
+}
+
+/* --- THE ANIMATED DOT SEQUENCE --- */
+.loader-dot {
+    opacity: 0;
+    transform: scale(0);
+    transform-origin: 68% 28%;
+    /* 1. Pops in at 1.3s. 2. Starts the blinking sequence at 1.8s */
+    animation:
+        popDot 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 1.3s forwards,
+        cyberBlink 2.5s ease-in-out 1.8s forwards;
+}
+
+@keyframes drawLine {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes popDot {
     0% {
-        clip: rect(10px, 9999px, 31px, 0);
-    }
-
-    20% {
-        clip: rect(62px, 9999px, 14px, 0);
-    }
-
-    40% {
-        clip: rect(34px, 9999px, 83px, 0);
-    }
-
-    60% {
-        clip: rect(89px, 9999px, 55px, 0);
-    }
-
-    80% {
-        clip: rect(21px, 9999px, 76px, 0);
+        opacity: 0;
+        transform: scale(0);
     }
 
     100% {
-        clip: rect(45px, 9999px, 23px, 0);
+        opacity: 1;
+        transform: scale(1);
+        filter: drop-shadow(0 0 10px var(--accent-acid));
     }
 }
 
-@keyframes glitch-anim2 {
+/* THE NEW SYSTEM OVERRIDE BLINK & LIGHTING STROBE */
+@keyframes cyberBlink {
+
+    /* Green Processing Blinks */
     0% {
-        clip: rect(65px, 9999px, 100px, 0);
+        fill: var(--accent-acid);
+        filter: drop-shadow(0 0 10px var(--accent-acid));
+        opacity: 1;
+        transform: scale(1);
     }
 
-    20% {
-        clip: rect(15px, 9999px, 88px, 0);
+    15% {
+        opacity: 0.1;
+        transform: scale(0.9);
     }
 
-    40% {
-        clip: rect(98px, 9999px, 12px, 0);
+    30% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    45% {
+        opacity: 0.1;
+        transform: scale(0.9);
     }
 
     60% {
-        clip: rect(43px, 9999px, 67px, 0);
+        fill: var(--accent-acid);
+        filter: drop-shadow(0 0 10px var(--accent-acid));
+        opacity: 1;
+        transform: scale(1);
     }
 
-    80% {
-        clip: rect(72px, 9999px, 34px, 0);
+    /* The Split-Second Blackout */
+    65% {
+        fill: var(--accent-acid);
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    /* THE HIGH-VOLTAGE RED LIGHT EFFECT (Rapid Strobe) */
+    70% {
+        fill: #ff0033;
+        filter: drop-shadow(0 0 40px #ff0033);
+        opacity: 1;
+        transform: scale(1.4);
+    }
+
+    72% {
+        opacity: 0.2;
+        filter: drop-shadow(0 0 5px #ff0033);
+        transform: scale(1.2);
+    }
+
+    74% {
+        opacity: 1;
+        filter: drop-shadow(0 0 50px #ff0033);
+        transform: scale(1.5);
+    }
+
+    76% {
+        opacity: 0;
+    }
+
+    78% {
+        opacity: 1;
+        filter: drop-shadow(0 0 40px #ff0033);
+        transform: scale(1.4);
+    }
+
+    85% {
+        opacity: 0.5;
+        filter: drop-shadow(0 0 15px #ff0033);
+        transform: scale(1.2);
+    }
+
+    /* Final Red Lock-in Before Doors Open */
+    95% {
+        fill: #ff0033;
+        filter: drop-shadow(0 0 40px #ff0033);
+        opacity: 1;
+        transform: scale(1.5);
     }
 
     100% {
-        clip: rect(22px, 9999px, 91px, 0);
+        fill: #ff0033;
+        filter: drop-shadow(0 0 40px #ff0033);
+        opacity: 1;
+        transform: scale(1.5);
     }
 }
 
-.glitch {
-    /* ... other styles ... */
+/* Optional: Make the logo zoom even harder into the camera when the doors open */
+.logo-loader.split-active .loader-logo-wrapper {
+    opacity: 0;
+    transform: scale(3);
+}
 
-    /* Change the 1.8s at the end to 2.5s */
-    animation: typeLine 0.1s forwards 2.5s;
+/* Cleanup class to hide container entirely */
+.logo-loader.hidden {
+    display: none;
 }
 
 /* ==========================================
@@ -1212,10 +1430,13 @@ body {
     align-items: center;
     gap: 1rem;
     cursor: pointer;
-    z-index: 9900;
-    /* Sits above content, below lightbox */
+    z-index: 9000;
     transition: all 0.3s ease;
     overflow: hidden;
+}
+
+.theme-toggle * {
+    pointer-events: none;
 }
 
 .theme-toggle:hover {
@@ -1253,115 +1474,15 @@ body {
 /* ==========================================
    LIGHT MODE: "BLUEPRINT / STUDIO" OVERRIDES
    ========================================== */
-/* When the body has this attribute, these colors replace the dark ones */
-/* ==========================================
-   LIGHT MODE: "BLUEPRINT / STUDIO" OVERRIDES
-   ========================================== */
-/* Adding 'html' here guarantees these colors forcefully override the defaults */
-html[data-theme="light"] {
-    --bg-base: #f4f4f5;
-    --surface: #ffffff;
-    --text-main: #09090b;
-    --text-muted: #71717a;
-    --accent-acid: #2563eb;
-    --border-color: #e4e4e7;
-}
-
-/* Specific Light Mode Fixes */
-html[data-theme="light"] .theme-toggle {
-    background: #ffffff;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-html[data-theme="light"] .toggle-track {
-    background: #e4e4e7;
-}
-
-html[data-theme="light"] .toggle-indicator {
-    transform: translateX(20px);
-    background: var(--accent-acid);
-}
-
-html[data-theme="light"] body {
-    background-image:
-        linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
-}
-
-
-
-
-
-
-/* ==========================================
-   SCROLL PROGRESS TRACKER
-   ========================================== */
-.scroll-progress {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 4px;
-    /* Nice and thin */
-    background-color: var(--accent-acid);
-    width: 0%;
-    /* Starts empty */
-    z-index: 100000;
-    /* Stays above everything */
-    box-shadow: 0 0 12px var(--accent-acid);
-    /* The neon glow */
-    transition: width 0.1s ease-out;
-    /* Makes the tracking feel smooth, not jittery */
-}
-
-
-/* 1. The Theme Toggle (Above the website, but below the cursor) */
-.theme-toggle {
-    /* ... your other styles ... */
-    z-index: 9000;
-}
-
-/* Add this right below .theme-toggle to stop the text/icons from stealing the click */
-.theme-toggle * {
-    pointer-events: none;
-}
-
-/* 2. The Custom Cursor (Always on top of the toggle) */
-.custom-cursor {
-    /* ... your other styles ... */
-    z-index: 99999 !important;
-}
-
-.cursor-ring {
-    /* ... your other styles ... */
-    z-index: 99998 !important;
-}
-
-/* 3. The Boot Screen (The absolute highest, so it covers the cursor when loading) */
-.boot-screen {
-    /* ... your other styles ... */
-    z-index: 999999 !important;
-}
-
-
-/* ==========================================
-   LIGHT MODE: "BLUEPRINT / STUDIO" OVERRIDES
-   ========================================== */
 html[data-theme="light"] {
     --bg-base: #f0f4f8;
-    /* Cool drafting paper gray */
     --surface: #ffffff;
-    /* Pure white for the bento cards */
     --text-main: #0f172a;
-    /* Deep architectural slate */
     --text-muted: #64748b;
-    /* Soft technical gray */
     --accent-acid: #0044ff;
-    /* Sharp, vibrant blueprint blue */
     --border-color: #cbd5e1;
-    /* Visible structural lines */
 }
 
-/* Specific Light Mode Fixes */
 html[data-theme="light"] .theme-toggle {
     background: #ffffff;
     box-shadow: 0 4px 15px rgba(0, 68, 255, 0.15);
@@ -1376,7 +1497,6 @@ html[data-theme="light"] .toggle-indicator {
     background: var(--accent-acid);
 }
 
-/* Turns the background grid into a subtle blueprint pattern */
 html[data-theme="light"] body {
     background-image:
         linear-gradient(rgba(0, 68, 255, 0.05) 1px, transparent 1px),
@@ -1386,7 +1506,6 @@ html[data-theme="light"] body {
 /* ==========================================
    SMOOTH THEME TRANSITIONS
    ========================================== */
-/* 1. Target the body and all structural cards */
 body,
 .bento-card,
 .video-monitor,
@@ -1402,7 +1521,6 @@ textarea {
         box-shadow 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* 2. Target the typography so text fades smoothly */
 h1,
 h2,
 h3,
@@ -1415,7 +1533,6 @@ li,
     transition: color 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* 3. Ensure the SVG/Icons transition too */
 i,
 svg,
 .tool-icon {
@@ -1423,25 +1540,23 @@ svg,
 }
 
 /* ==========================================
-   LIVE HERO BACKGROUND
+   SCROLL PROGRESS TRACKER
    ========================================== */
-/* Lock the canvas inside the hero section */
-.hero {
-    position: relative;
-    width: 100%;
-    min-height: 100vh;
-    /* Forces the section to fill the entire screen */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    /* Centers your text vertically */
-    align-items: center;
-    /* Centers your text horizontally */
-    text-align: center;
-    overflow: hidden;
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    background-color: var(--accent-acid);
+    width: 0%;
+    z-index: 100000;
+    box-shadow: 0 0 12px var(--accent-acid);
+    transition: width 0.1s ease-out;
 }
 
-/* Position the canvas to fill the hero background */
+/* ==========================================
+   LIVE HERO BACKGROUND
+   ========================================== */
 .hero-canvas {
     position: absolute;
     top: 0;
@@ -1453,7 +1568,6 @@ svg,
     opacity: 0.5;
 }
 
-/* Force the text and buttons to sit above the canvas */
 .hero-content {
     position: relative;
     z-index: 2;
@@ -1462,14 +1576,12 @@ svg,
 /* ==========================================
    SECONDARY LIVE BACKGROUNDS
    ========================================== */
-/* Ensure the sections can contain absolute canvases */
 .video-showcase,
 .contact {
     position: relative;
     overflow: hidden;
 }
 
-/* The Canvas Styling */
 .section-canvas {
     position: absolute;
     top: 0;
@@ -1477,19 +1589,1695 @@ svg,
     width: 100%;
     height: 100%;
     z-index: 0;
-    /* Keep it at the very back */
     pointer-events: none;
-    /* Let clicks pass right through to the buttons */
     opacity: 0.15;
-    /* Very subtle so it doesn't distract from videos/forms */
     transition: opacity 0.5s ease;
 }
 
-/* Force the content to sit above the canvas */
 .vertical-command-grid,
 .Certtext,
 .contact-wrapper,
 .section-title {
     position: relative;
     z-index: 2;
+}
+
+/* ==========================================
+   VA DASHBOARD (CYBER NODE AESTHETIC)
+   ========================================== */
+.va-dashboard {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.va-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important;
+    gap: 2rem;
+    align-items: stretch !important;
+    /* Forces the equal height */
+}
+
+.va-card {
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    padding: 2.5rem 2rem;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.5s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+    /* Critical CSS Grid rule */
+}
+
+/* Panel Lift & Glow on Hover */
+.va-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent-acid);
+    box-shadow: 0 15px 35px rgba(204, 255, 0, 0.05);
+}
+
+/* The Animated CRT Scanline */
+.va-scanline {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 48%, rgba(204, 255, 0, 0.08) 50%, transparent 52%);
+    background-size: 100% 200%;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1;
+    transition: opacity 0.3s ease;
+}
+
+.va-card:hover .va-scanline {
+    opacity: 1;
+    animation: scanlineSweep 2.5s linear infinite;
+}
+
+@keyframes scanlineSweep {
+    0% {
+        background-position: 0% -100%;
+    }
+
+    100% {
+        background-position: 0% 200%;
+    }
+}
+
+/* The Header & Status Dot */
+.va-card-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 1.5rem;
+    position: relative;
+    z-index: 2;
+    transition: border-color 0.4s ease;
+}
+
+.va-status-dot {
+    width: 12px;
+    height: 12px;
+    background-color: var(--border-color);
+    border-radius: 50%;
+    transition: background-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.va-card:hover .va-status-dot {
+    background-color: var(--accent-acid);
+    box-shadow: 0 0 12px var(--accent-acid);
+}
+
+.va-card:hover .va-card-header {
+    border-color: rgba(204, 255, 0, 0.3);
+}
+
+.va-card-header h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: var(--text-main);
+    letter-spacing: 2px;
+}
+
+/* Data Items (The Skills) */
+/* 3. The Content (The Spring) */
+.va-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+    flex-grow: 1 !important;
+    /* Pushes the empty space down */
+}
+
+.va-item {
+    border-left: 2px solid var(--border-color);
+    padding-left: 1.2rem;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.va-item h4 {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+    font-family: monospace;
+    letter-spacing: 1px;
+    transition: color 0.4s ease;
+}
+
+.va-item p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0;
+    transition: color 0.4s ease;
+}
+
+/* The Cascading Hover Interaction */
+.va-card:hover .va-item {
+    border-left-color: var(--accent-acid);
+    transform: translateX(8px);
+    /* Slides the text slightly right */
+}
+
+/* Staggered animation delays so they slide in one by one */
+.va-card:hover .va-item:nth-child(1) {
+    transition-delay: 0.05s;
+}
+
+.va-card:hover .va-item:nth-child(2) {
+    transition-delay: 0.10s;
+}
+
+.va-card:hover .va-item:nth-child(3) {
+    transition-delay: 0.15s;
+}
+
+.va-card:hover .va-item:nth-child(4) {
+    transition-delay: 0.20s;
+}
+
+.va-card:hover .va-item h4 {
+    color: var(--accent-acid);
+}
+
+.va-card:hover .va-item p {
+    color: var(--text-main);
+    /* Brightens the description text */
+}
+
+/* Light Mode Overrides for the animations */
+html[data-theme="light"] .va-scanline {
+    background: linear-gradient(to bottom, transparent 48%, rgba(0, 68, 255, 0.08) 50%, transparent 52%);
+}
+
+html[data-theme="light"] .va-card:hover .va-card-header {
+    border-color: rgba(0, 68, 255, 0.3);
+}
+
+/* ==========================================
+   UPGRADED CAPABILITIES CARDS (CYBER PANELS)
+   ========================================== */
+.cyber-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    /* FIX: Increased from 4rem to 6rem to make room for the longer text */
+    padding-bottom: 6rem;
+}
+
+.card-icon {
+    font-family: monospace;
+    color: var(--text-muted);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    transition: color 0.4s ease;
+}
+
+.cyber-card:hover .card-icon {
+    color: var(--accent-acid);
+}
+
+/* The sweeping glare effect */
+.card-glare {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(204, 255, 0, 0.05) 50%, rgba(255, 255, 255, 0) 100%);
+    transform: skewX(-25deg);
+    transition: none;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.cyber-card:hover .card-glare {
+    animation: glareSweep 0.8s ease-out forwards;
+}
+
+@keyframes glareSweep {
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 200%;
+    }
+}
+
+/* The sliding Tech Stack tray */
+.card-tech-stack {
+    position: absolute;
+    /* FIX: Pushed further down from -50px to -80px to completely hide it */
+    bottom: -80px;
+    left: 0;
+    width: 100%;
+    padding: 1.5rem 2.5rem;
+    background: rgba(10, 10, 10, 0.8);
+    backdrop-filter: blur(5px);
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    gap: 1rem;
+    transition: bottom 0.4s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.4s ease;
+}
+
+.cyber-card:hover .card-tech-stack {
+    bottom: 0;
+    /* Slides up smoothly */
+    border-color: rgba(204, 255, 0, 0.3);
+}
+
+.card-tech-stack span {
+    font-size: 0.8rem;
+    font-family: monospace;
+    color: var(--accent-acid);
+    background: rgba(204, 255, 0, 0.1);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+}
+
+/* ==========================================
+   TERMINAL LOG SIDEBAR
+   ========================================== */
+.terminal-sidebar {
+    padding: 0;
+    /* Remove default padding so the header sits flush */
+    background: #050505;
+    display: flex;
+    flex-direction: column;
+}
+
+.terminal-header {
+    background: #111;
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.terminal-header .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.dot.red {
+    background-color: #ff5f56;
+}
+
+.dot.yellow {
+    background-color: #ffbd2e;
+}
+
+.dot.green {
+    background-color: #27c93f;
+}
+
+.term-title {
+    margin-left: auto;
+    font-family: monospace;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+.terminal-body {
+    padding: 1.5rem;
+    font-family: monospace;
+}
+
+.log-entry {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 0.8rem;
+    line-height: 1.4;
+}
+
+/* Blinking cursor for the live effect */
+.blinking-cursor {
+    color: var(--accent-acid);
+    animation: blink 1s step-end infinite;
+    margin-top: 1rem;
+}
+
+/* Light mode overrides for the new elements */
+html[data-theme="light"] .card-tech-stack {
+    background: rgba(255, 255, 255, 0.9);
+}
+
+html[data-theme="light"] .card-tech-stack span {
+    background: rgba(0, 68, 255, 0.1);
+}
+
+html[data-theme="light"] .card-glare {
+    background: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 68, 255, 0.05) 50%, rgba(0, 0, 0, 0) 100%);
+}
+
+/* ==========================================
+   MOTHERBOARD TRACE TIMELINE (STRUCTURED)
+   ========================================== */
+/* Increase overall width */
+.circuit-section {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    max-width: 1200px;
+    /* Increased from 1100px */
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Make it longer with more spacing between nodes */
+.circuit-container {
+    position: relative;
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+    /* Increased from 2rem to make the line longer */
+}
+
+/* The Central Groove (Unpowered) */
+.circuit-trace-track {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 100%;
+    background-color: var(--border-color);
+    z-index: 1;
+}
+
+/* The Live Neon Fill (Powered by JS Scroll) */
+.circuit-trace-fill {
+    width: 100%;
+    height: 0%;
+    background-color: var(--accent-acid);
+    box-shadow: 0 0 10px var(--accent-acid);
+    transition: height 0.1s linear;
+}
+
+/* Timeline Layout Blocks */
+.circuit-block {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    z-index: 2;
+}
+
+/* Hexagon Solder Pads */
+.circuit-pad {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 24px;
+    height: 24px;
+    background-color: var(--bg-base);
+    border: 2px solid var(--border-color);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    z-index: 3;
+    transition: border-color 0.4s ease, box-shadow 0.4s ease, background-color 0.4s ease;
+}
+
+/* Connecting Branches (90-degree lines) */
+.circuit-branch {
+    position: absolute;
+    top: 50%;
+    width: 50px;
+    /* FIX: Shortened to exactly bridge the gap */
+    height: 2px;
+    background-color: var(--border-color);
+    z-index: 0;
+    /* Ensures it sits behind the card */
+    transition: background-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.circuit-block.left .circuit-branch {
+    right: 50%;
+}
+
+.circuit-block.right .circuit-branch {
+    left: 50%;
+}
+
+.circuit-block.left .circuit-branch {
+    right: 50%;
+}
+
+.circuit-block.right .circuit-branch {
+    left: 50%;
+}
+
+/* Card Positioning */
+/* Fix the text overlap by adding 6rem of padding to the bottom */
+.circuit-card {
+    width: calc(50% - 50px);
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 2.5rem 2.5rem 6rem 2.5rem;
+    /* Added massive bottom padding */
+    transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
+}
+
+.circuit-block.left {
+    justify-content: flex-start;
+}
+
+.circuit-block.right {
+    justify-content: flex-end;
+}
+
+/* The Tech Hover State */
+.circuit-block:hover .circuit-pad {
+    border-color: var(--accent-acid);
+    background-color: var(--accent-acid);
+    box-shadow: 0 0 15px var(--accent-acid);
+}
+
+.circuit-block:hover .circuit-branch {
+    background-color: var(--accent-acid);
+    box-shadow: 0 0 5px var(--accent-acid);
+}
+
+.circuit-block:hover .circuit-card {
+    border-color: var(--accent-acid);
+    transform: translateY(-5px);
+}
+
+/* Card Typography */
+.timeline-date {
+    display: inline-block;
+    font-family: monospace;
+    color: #000;
+    background: var(--accent-acid);
+    padding: 0.3rem 0.6rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border-radius: 2px;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+}
+
+.circuit-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.3rem;
+    color: var(--text-main);
+}
+
+.circuit-card h4 {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    font-family: monospace;
+    margin-bottom: 1.5rem;
+}
+
+.circuit-card p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+/* Add the .active state for the scroll animation alongside the :hover state */
+.circuit-block:hover .circuit-pad,
+.circuit-block.active .circuit-pad {
+    border-color: var(--accent-acid);
+    background-color: var(--accent-acid);
+    box-shadow: 0 0 15px var(--accent-acid);
+}
+
+.circuit-block:hover .circuit-branch,
+.circuit-block.active .circuit-branch {
+    background-color: var(--accent-acid);
+    box-shadow: 0 0 5px var(--accent-acid);
+}
+
+.circuit-block:hover .circuit-card,
+.circuit-block.active .circuit-card {
+    border-color: var(--accent-acid);
+}
+
+/* Mobile Responsiveness (Collapses to one side) */
+@media (max-width: 900px) {
+    .circuit-trace-track {
+        left: 20px;
+    }
+
+    .circuit-pad {
+        left: 20px;
+    }
+
+    .circuit-branch {
+        width: 30px;
+        left: 20px !important;
+    }
+
+    .circuit-card {
+        width: calc(100% - 60px);
+        margin-left: 60px;
+    }
+
+    .circuit-block.left,
+    .circuit-block.right {
+        justify-content: flex-end;
+    }
+}
+
+/* Light Mode Overrides */
+html[data-theme="light"] .circuit-pad {
+    background-color: #fff;
+}
+
+html[data-theme="light"] .timeline-date {
+    background: var(--accent-acid);
+    color: #fff;
+}
+
+/* ==========================================
+   UPGRADED CYBER FOOTER
+   ========================================== */
+.cyber-footer {
+    border-top: 1px solid var(--border-color);
+    background: #050505;
+    padding: 3rem 2rem 2rem 2rem;
+    font-family: monospace;
+    position: relative;
+    z-index: 10;
+}
+
+.footer-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px dashed var(--border-color);
+}
+
+/* System Status (Left) */
+.footer-sys {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+}
+
+.sys-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent-acid);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--accent-acid);
+    animation: pulseClose 2s infinite;
+    /* Reusing your existing pulse animation */
+}
+
+.divider {
+    color: var(--border-color);
+}
+
+/* Comm Links (Center) */
+.footer-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.footer-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--accent-acid);
+    text-shadow: 0 0 8px rgba(204, 255, 0, 0.4);
+}
+
+/* Return to Top (Right) */
+.return-top {
+    color: var(--accent-acid);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding: 0.5rem 1rem;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.return-top:hover {
+    border-color: var(--accent-acid);
+    background: rgba(204, 255, 0, 0.05);
+}
+
+/* Bottom Copyright */
+.footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 2rem;
+}
+
+.footer-bottom p {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    opacity: 0.5;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .footer-grid {
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .footer-sys {
+        justify-content: center;
+    }
+}
+
+/* Light mode overrides */
+html[data-theme="light"] .cyber-footer {
+    background: #f8fafc;
+}
+
+html[data-theme="light"] .sys-dot {
+    background-color: var(--accent-acid);
+    box-shadow: 0 0 8px rgba(0, 68, 255, 0.5);
+}
+
+/* --- THE LIGHTNING BURST --- */
+.lightning-svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 280px;
+    height: 280px;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    /* Forces it behind the white 'N' */
+    pointer-events: none;
+    filter: drop-shadow(0 0 15px #ff0033);
+}
+
+.lightning-bolt {
+    opacity: 0;
+    /* Waits exactly 3.5 seconds (right when the red flash hits) then violently flickers for 1 second */
+    animation: lightningCrack 1s steps(10) 3.5s forwards;
+}
+
+/* The Strobe Keyframes */
+@keyframes lightningCrack {
+    0% {
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+        transform: scale(1.05) rotate(2deg);
+    }
+
+    20% {
+        opacity: 0;
+    }
+
+    30% {
+        opacity: 1;
+        transform: scale(0.95) rotate(-2deg);
+        stroke-width: 6;
+    }
+
+    40% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.1) rotate(5deg);
+    }
+
+    60% {
+        opacity: 0.2;
+    }
+
+    70% {
+        opacity: 1;
+        transform: scale(0.9) rotate(-5deg);
+        stroke-width: 8;
+    }
+
+    80% {
+        opacity: 0;
+    }
+
+    90% {
+        opacity: 1;
+        transform: scale(1.2);
+        stroke-width: 10;
+        filter: drop-shadow(0 0 30px #ff0033);
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+/* ==========================================
+   LIGHT MODE: HOVER, SHADOW & CURSOR FIXES
+   ========================================== */
+html[data-theme="light"] .bento-card:hover {
+    border-color: rgba(0, 68, 255, 0.3);
+}
+
+html[data-theme="light"] .skill-tags span:hover {
+    background: rgba(0, 68, 255, 0.05);
+}
+
+html[data-theme="light"] .service-card:hover {
+    border-color: rgba(0, 68, 255, 0.5);
+}
+
+html[data-theme="light"] .btn:hover {
+    box-shadow: 0 0 20px rgba(0, 68, 255, 0.4);
+}
+
+html[data-theme="light"] .masonry-item:hover {
+    box-shadow: 0 10px 30px rgba(0, 68, 255, 0.15);
+}
+
+html[data-theme="light"] .nav-arrow:hover {
+    box-shadow: 0 0 15px rgba(0, 68, 255, 0.4);
+}
+
+html[data-theme="light"] .video-monitor:hover {
+    box-shadow: 0 5px 20px rgba(0, 68, 255, 0.15);
+}
+
+html[data-theme="light"] .input-group input:focus,
+html[data-theme="light"] .input-group textarea:focus {
+    box-shadow: 0 0 15px rgba(0, 68, 255, 0.1);
+}
+
+html[data-theme="light"] .cert-card:hover {
+    box-shadow: 0 10px 30px rgba(0, 68, 255, 0.1);
+}
+
+html[data-theme="light"] .va-card:hover {
+    box-shadow: 0 15px 35px rgba(0, 68, 255, 0.05);
+}
+
+html[data-theme="light"] .theme-toggle:hover {
+    box-shadow: 0 0 15px rgba(0, 68, 255, 0.2);
+}
+
+html[data-theme="light"] .lightbox-content,
+html[data-theme="light"] .cert-img-wrapper {
+    box-shadow: 0 0 40px rgba(0, 68, 255, 0.15);
+}
+
+html[data-theme="light"] .cert-modal-title {
+    text-shadow: 0 0 10px rgba(0, 68, 255, 0.4);
+}
+
+/* Mouse Outer Circle (Cursor Ring) Fix */
+html[data-theme="light"] .cursor-ring {
+    border-color: rgba(0, 68, 255, 0.4);
+}
+
+html[data-theme="light"] .cursor-ring.hover-active {
+    background-color: rgba(0, 68, 255, 0.05);
+}
+
+/* ==========================================
+   FIXED TOOLS CARD DESIGN
+   ========================================== */
+
+.bento-grid .tools-card {
+    grid-column: span 12;
+    display: grid !important;
+    grid-template-columns: 0.9fr 1.6fr;
+    align-items: stretch;
+    gap: 2rem;
+    width: 100%;
+}
+
+.bento-grid .tools-intro {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.bento-grid .tools-label {
+    display: inline-block;
+    font-family: monospace;
+    font-size: 0.75rem;
+    color: var(--accent-acid);
+    letter-spacing: 2px;
+    margin-bottom: 0.8rem;
+}
+
+.bento-grid .tools-intro h3 {
+    margin-bottom: 1rem;
+}
+
+.bento-grid .tools-intro p {
+    color: var(--text-muted);
+    max-width: 420px;
+    font-size: 0.95rem;
+}
+
+.bento-grid .tools-showcase {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    width: 100%;
+}
+
+.bento-grid .tool-module {
+    position: relative;
+    min-height: 170px;
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    background:
+        linear-gradient(180deg, rgba(204, 255, 0, 0.04), transparent 60%),
+        rgba(10, 10, 10, 0.25);
+    overflow: hidden;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.bento-grid .tool-module::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--accent-acid);
+    opacity: 0.8;
+}
+
+.bento-grid .tool-module:hover {
+    transform: translateY(-6px);
+    border-color: var(--accent-acid);
+    box-shadow: 0 10px 25px rgba(204, 255, 0, 0.08);
+}
+
+.bento-grid .tool-number {
+    font-family: monospace;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 1.5rem;
+}
+
+.bento-grid .tool-module h4 {
+    color: var(--text-main);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.8rem;
+    font-size: 1rem;
+}
+
+.bento-grid .tool-module p {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+/* Tablet */
+@media (max-width: 1000px) {
+    .bento-grid .tools-card {
+        grid-template-columns: 1fr;
+    }
+
+    .bento-grid .tools-showcase {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Mobile */
+@media (max-width: 650px) {
+    .bento-grid .tools-showcase {
+        grid-template-columns: 1fr;
+    }
+
+    .bento-grid .tool-module {
+        min-height: auto;
+    }
+}
+
+/* ==========================================
+   LOGO CARD BESIDE MAIN SKILLS
+   ========================================== */
+
+.core-skills-card {
+    grid-column: span 8;
+}
+
+.logo-showcase-card {
+    grid-column: span 4;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    background:
+        radial-gradient(circle at center, rgba(204, 255, 0, 0.08), transparent 55%),
+        var(--surface);
+}
+
+.logo-showcase-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(90deg, transparent, rgba(204, 255, 0, 0.08), transparent);
+    transform: translateX(-100%);
+    animation: logoCardSweep 4s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.logo-showcase-card::after {
+    content: 'NATH.STUDIO';
+    position: absolute;
+    bottom: 1.2rem;
+    right: 1.4rem;
+    font-family: monospace;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    color: rgba(204, 255, 0, 0.35);
+}
+
+.logo-orbit {
+    width: 190px;
+    height: 190px;
+    border: 1px solid rgba(204, 255, 0, 0.35);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    animation: logoFloat 4s ease-in-out infinite;
+}
+
+.logo-orbit::before {
+    content: '';
+    position: absolute;
+    inset: -14px;
+    border: 1px dashed rgba(204, 255, 0, 0.25);
+    border-radius: 50%;
+    animation: logoOrbitSpin 12s linear infinite;
+}
+
+.logo-orbit::after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    top: 12px;
+    right: 32px;
+    border-radius: 50%;
+    background: var(--accent-acid);
+    box-shadow: 0 0 20px var(--accent-acid);
+    animation: logoPulseDot 1.5s ease-in-out infinite;
+}
+
+.logo-scanline {
+    position: absolute;
+    width: 120%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent-acid), transparent);
+    opacity: 0.6;
+    animation: logoScan 2.8s ease-in-out infinite;
+}
+
+.side-logo-svg {
+    width: 110px;
+    height: 110px;
+    filter: drop-shadow(0 0 18px rgba(204, 255, 0, 0.25));
+    z-index: 2;
+}
+
+.side-logo-path {
+    stroke-dasharray: 150;
+    stroke-dashoffset: 150;
+    animation: sideLogoDraw 2.2s ease forwards, sideLogoGlow 3s ease-in-out infinite 2.2s;
+}
+
+.side-logo-dot {
+    opacity: 0;
+    transform: scale(0);
+    transform-origin: 68% 28%;
+    animation: sideLogoDotPop 0.6s ease forwards 1.4s, sideLogoDotBlink 2s ease-in-out infinite 2s;
+}
+
+.logo-card-text {
+    margin-top: 2rem;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.logo-card-text span {
+    display: block;
+    font-family: monospace;
+    color: var(--accent-acid);
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+}
+
+.logo-card-text p {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    max-width: 230px;
+}
+
+/* Animations */
+@keyframes logoCardSweep {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    45%,
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes logoFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes logoOrbitSpin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes logoPulseDot {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.4;
+        transform: scale(0.8);
+    }
+}
+
+@keyframes logoScan {
+    0% {
+        transform: translateY(-70px);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 0.7;
+    }
+
+    100% {
+        transform: translateY(70px);
+        opacity: 0;
+    }
+}
+
+@keyframes sideLogoDraw {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes sideLogoGlow {
+
+    0%,
+    100% {
+        filter: drop-shadow(0 0 4px rgba(204, 255, 0, 0.2));
+    }
+
+    50% {
+        filter: drop-shadow(0 0 18px rgba(204, 255, 0, 0.7));
+    }
+}
+
+@keyframes sideLogoDotPop {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes sideLogoDotBlink {
+
+    0%,
+    100% {
+        opacity: 1;
+        filter: drop-shadow(0 0 10px var(--accent-acid));
+    }
+
+    50% {
+        opacity: 0.35;
+        filter: drop-shadow(0 0 3px var(--accent-acid));
+    }
+}
+
+/* Tablet and mobile */
+@media (max-width: 900px) {
+
+    .core-skills-card,
+    .logo-showcase-card {
+        grid-column: span 12;
+    }
+
+    .logo-showcase-card {
+        min-height: 320px;
+    }
+}
+
+
+/* ==========================================
+   HERO POLISH
+   ========================================== */
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    padding: 2rem;
+}
+
+.hero-content::before {
+    content: '';
+    position: absolute;
+    inset: -2rem;
+    background: radial-gradient(circle at center, rgba(10, 10, 10, 0.75), transparent 70%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.hero-badge {
+    display: inline-block;
+    font-family: monospace;
+    font-size: 0.8rem;
+    color: var(--accent-acid);
+    letter-spacing: 2px;
+    border: 1px solid rgba(204, 255, 0, 0.35);
+    padding: 0.45rem 0.9rem;
+    margin-bottom: 1.5rem;
+    background: rgba(204, 255, 0, 0.04);
+    box-shadow: 0 0 20px rgba(204, 255, 0, 0.05);
+}
+
+.hero h2 {
+    text-shadow: 0 0 30px rgba(204, 255, 0, 0.08);
+}
+
+.hero-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn-secondary {
+    color: var(--text-main);
+    border-color: var(--border-color);
+}
+
+.btn-secondary:hover {
+    border-color: var(--accent-acid);
+    color: var(--bg-base);
+}
+
+/* ==========================================
+   MODERN TOP BAR HEADER
+   ========================================== */
+
+.site-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 10000;
+    width: 100%;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid var(--border-color);
+    background: rgba(10, 10, 10, 0.78);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.brand-mark {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    color: var(--text-main);
+    text-decoration: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+.brand-mark span::after {
+    content: '.';
+    color: var(--accent-acid);
+}
+
+.brand-logo {
+    width: 38px;
+    height: 38px;
+    color: var(--text-main);
+    filter: drop-shadow(0 0 8px rgba(204, 255, 0, 0.15));
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.brand-mark:hover .brand-logo {
+    transform: rotate(-5deg) scale(1.08);
+    filter: drop-shadow(0 0 14px rgba(204, 255, 0, 0.35));
+}
+
+.topbar-nav ul {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1.6rem;
+    list-style: none;
+    padding: 0;
+    flex-wrap: wrap;
+}
+
+.topbar-nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.topbar-nav a:hover {
+    color: var(--accent-acid);
+    text-shadow: 0 0 12px rgba(204, 255, 0, 0.35);
+}
+
+/* Mobile */
+@media (max-width: 850px) {
+    .site-topbar {
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .topbar-nav ul {
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .topbar-nav a {
+        font-size: 0.75rem;
+    }
+}
+
+/* ==========================================
+   TOPBAR NAV FIX + HOVER ANIMATION
+   ========================================== */
+
+/* Fix annoying line caused by old nav styles */
+.site-topbar .topbar-nav {
+    border-bottom: none !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    position: static !important;
+    top: auto !important;
+    z-index: auto !important;
+}
+
+/* Make whole topbar a little bigger */
+.site-topbar {
+    padding: 1.25rem 2.5rem !important;
+}
+
+/* Slightly bigger brand */
+.brand-mark {
+    font-size: 1rem;
+    gap: 1rem;
+}
+
+.brand-logo {
+    width: 44px;
+    height: 44px;
+}
+
+/* Bigger nav text */
+.topbar-nav ul {
+    gap: 2rem;
+}
+
+.topbar-nav a {
+    position: relative;
+    font-size: 0.9rem;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    padding: 0.4rem 0;
+    color: var(--text-muted);
+    overflow: hidden;
+}
+
+/* Animated underline glow */
+.topbar-nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--accent-acid);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.35s ease;
+    box-shadow: 0 0 12px var(--accent-acid);
+}
+
+/* Small glow sweep behind text */
+.topbar-nav a::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(204, 255, 0, 0.16),
+            transparent);
+    transform: translateX(-120%);
+    transition: transform 0.45s ease;
+    pointer-events: none;
+}
+
+/* Hover effect */
+.topbar-nav a:hover {
+    color: var(--accent-acid);
+    text-shadow:
+        0 0 8px rgba(204, 255, 0, 0.7),
+        0 0 20px rgba(204, 255, 0, 0.35);
+}
+
+.topbar-nav a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.topbar-nav a:hover::before {
+    transform: translateX(120%);
+}
+
+/* Brand hover polish */
+.brand-mark:hover span {
+    color: var(--accent-acid);
+    text-shadow:
+        0 0 8px rgba(204, 255, 0, 0.6),
+        0 0 18px rgba(204, 255, 0, 0.25);
+}
+
+.brand-mark:hover .brand-logo {
+    transform: rotate(-6deg) scale(1.12);
+    filter: drop-shadow(0 0 16px rgba(204, 255, 0, 0.55));
+}
+
+/* Mobile adjustment */
+@media (max-width: 850px) {
+    .site-topbar {
+        padding: 1rem !important;
+    }
+
+    .brand-logo {
+        width: 38px;
+        height: 38px;
+    }
+
+    .topbar-nav ul {
+        gap: 1rem;
+    }
+
+    .topbar-nav a {
+        font-size: 0.78rem;
+    }
+}
+
+/* ==========================================
+   FIX BROKEN NAV HOVER BLOCKS
+   ========================================== */
+
+/* Remove old/global nav effects from the topbar nav */
+.site-topbar .topbar-nav {
+    border-bottom: none !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    position: static !important;
+}
+
+/* Remove the broken green block/sweep effect */
+.topbar-nav a::before {
+    content: none !important;
+    display: none !important;
+}
+
+/* Make nav cleaner and slightly bigger */
+.topbar-nav ul {
+    gap: 2rem;
+}
+
+.topbar-nav a {
+    position: relative;
+    display: inline-block;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    padding: 0.35rem 0;
+    overflow: visible !important;
+    transition:
+        color 0.3s ease,
+        text-shadow 0.3s ease,
+        transform 0.3s ease;
+}
+
+/* Clean animated underline only */
+.topbar-nav a::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -0.35rem;
+    width: 0;
+    height: 2px;
+    background: var(--accent-acid);
+    transform: translateX(-50%);
+    box-shadow: 0 0 12px var(--accent-acid);
+    transition: width 0.35s ease;
+}
+
+/* Hover animation */
+.topbar-nav a:hover {
+    color: var(--accent-acid);
+    transform: translateY(-2px);
+    text-shadow:
+        0 0 8px rgba(204, 255, 0, 0.75),
+        0 0 18px rgba(204, 255, 0, 0.35);
+}
+
+.topbar-nav a:hover::after {
+    width: 100%;
+}
+
+/* Brand hover */
+.brand-mark {
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.brand-mark:hover span {
+    color: var(--accent-acid);
+    text-shadow:
+        0 0 8px rgba(204, 255, 0, 0.65),
+        0 0 18px rgba(204, 255, 0, 0.3);
+}
+
+.brand-mark:hover .brand-logo {
+    transform: rotate(-6deg) scale(1.1);
+    filter: drop-shadow(0 0 14px rgba(204, 255, 0, 0.55));
+}
+
+/* Mobile */
+@media (max-width: 850px) {
+    .topbar-nav ul {
+        gap: 1rem;
+    }
+
+    .topbar-nav a {
+        font-size: 0.78rem;
+    }
+}
+
+/* ==========================================
+   CLEAN NAV HOVER - NO UNDERLINE / NO BLOCKS
+   ========================================== */
+
+/* Remove broken/extra pseudo animations */
+.topbar-nav a::before,
+.topbar-nav a::after {
+    content: none !important;
+    display: none !important;
+}
+
+/* Clean nav style */
+.topbar-nav a {
+    position: relative;
+    display: inline-block;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    padding: 0.35rem 0;
+    transition:
+        color 0.25s ease,
+        text-shadow 0.25s ease,
+        transform 0.25s ease;
+}
+
+/* Clean hover only */
+.topbar-nav a:hover {
+    color: var(--accent-acid);
+    transform: translateY(-2px);
+    text-shadow:
+        0 0 8px rgba(204, 255, 0, 0.65),
+        0 0 18px rgba(204, 255, 0, 0.28);
+}
+
+/* ==========================================
+   GLOBAL ROUNDED CORNER SYSTEM
+   Paste at the VERY BOTTOM of style.css
+   ========================================== */
+
+:root {
+    --radius-ui: 16px;
+}
+
+/* Main cards and panels */
+.bento-card,
+.service-card,
+.cyber-card,
+.content,
+.sidebar,
+.contact-wrapper,
+.va-card,
+.circuit-card,
+.cert-card,
+.video-monitor,
+.masonry-item,
+.tool-module,
+.logo-showcase-card,
+.terminal-sidebar {
+    border-radius: var(--radius-ui) !important;
+    overflow: hidden;
+}
+
+/* Forms and buttons */
+.btn,
+.input-group input,
+.input-group textarea,
+.contact-form button {
+    border-radius: var(--radius-ui) !important;
+}
+
+/* Tags and small label chips */
+.skill-tags span,
+.card-tech-stack span,
+.cert-status,
+.tools-label,
+.hero-badge,
+.timeline-date,
+.monitor-bar,
+.social-links a {
+    border-radius: var(--radius-ui) !important;
+}
+
+/* Images, iframes, and media containers */
+.profile-card img,
+.masonry-item img,
+.masonry-item iframe,
+.vertical-iframe-wrapper,
+.vertical-iframe-wrapper iframe,
+.cert-img-wrapper,
+.cert-modal img,
+.lightbox-content {
+    border-radius: var(--radius-ui) !important;
+}
+
+/* Contact / modal / lightbox UI */
+.nav-arrow,
+.close-lightbox,
+.cert-modal-close {
+    border-radius: var(--radius-ui) !important;
+}
+
+/* Top navigation */
+.site-topbar,
+.brand-logo {
+    border-radius: var(--radius-ui) !important;
+}
+
+/* Keep true circles/dots circular */
+.blink-dot,
+.rec-dot,
+.va-status-dot,
+.dot,
+.cursor-ring,
+.logo-orbit,
+.logo-orbit::before,
+.logo-orbit::after {
+    border-radius: 50% !important;
 }
