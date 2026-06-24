@@ -7,371 +7,754 @@
     <title>Nath Web Studio | Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%23171717' /><path d='M32 72 V28 L68 72 V28' stroke='%23e5e5e5' stroke-width='12' stroke-linecap='round' stroke-linejoin='round' fill='none' /><circle cx='68' cy='28' r='6' fill='%23ccff00' /></svg>">
 </head>
 
 <body>
     <div id="scroll-progress" class="scroll-progress"></div>
-    <div id="boot-screen" class="boot-screen">
-        <div class="terminal-content">
-            <p class="sys-text">> INITIALIZING NATH_WEB_STUDIO...</p>
-            <p class="sys-text">> SECURE_PROTOCOL: ACTIVE</p>
-            <p class="sys-text">> LOADING CYBERSECURITY_ASSETS... <span
-                    class="loading-bar">[||||||||||||||||||||]</span></p>
-            <h1 class="glitch" data-text="ACCESS GRANTED">ACCESS GRANTED</h1>
+
+    <!-- LOGO DRAW-IN + BRUTALIST SPLIT DOORS -->
+    <!-- LOGO DRAW-IN + SYSTEM OVERRIDE -->
+    <div id="logo-loader" class="logo-loader">
+        <div class="split-door door-left"></div>
+        <div class="split-door door-right"></div>
+
+        <div class="loader-logo-wrapper">
+            <!-- JUST YOUR LOGO -->
+            <svg class="loader-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                <path class="loader-path" d="M32 72 V28 L68 72 V28" stroke="#e5e5e5" stroke-width="8"
+                    stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                <circle class="loader-dot" cx="68" cy="28" r="6" fill="#ccff00" />
+            </svg>
         </div>
     </div>
-    <header>
-        <h1>Nath Web Studio</h1>
+
+    <header class="site-topbar">
+        <a href="#home" class="brand-mark" aria-label="Nath Web Studio Home">
+            <svg class="brand-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                <path d="M32 72 V28 L68 72 V28" stroke="currentColor" stroke-width="10" stroke-linecap="round"
+                    stroke-linejoin="round" fill="none" />
+                <circle cx="68" cy="28" r="6" fill="var(--accent-acid)" />
+            </svg>
+            <span>Nath Web Studio</span>
+        </a>
+
+        <nav class="topbar-nav">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#certificates">Certificates</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <nav>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#credentials">Credentials</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
-
     <main>
-        <!-- 1. NEW: Hero Landing Section -->
         <section id="home" class="hero">
             <canvas id="hero-canvas" class="hero-canvas"></canvas>
 
             <div class="hero-content">
+                <span class="hero-badge">AVAILABLE FOR DIGITAL PROJECTS</span>
+
                 <h2><span id="typewriter"></span><span class="cursor">_</span></h2>
-                <p>Specializing in striking Y2K aesthetics, responsive front-end development, and secure system
-                    practices.</p>
-                <a href="#services" class="btn">Explore My Work</a>
+
+                <p>
+                    I help students, creators, and small businesses build cleaner websites,
+                    graphics, videos, and digital support materials with a creative and practical style.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="#portfolio" class="btn">View My Work</a>
+                    <a href="#contact" class="btn btn-secondary">Contact Me</a>
+                </div>
             </div>
         </section>
 
         <section id="about" class="about-bento">
             <div class="bento-grid">
-
-                <div class="bento-card intro-card">
+                <div class="bento-card intro-card fade-in">
                     <h2>Hello, I’m Nath!</h2>
-                    <p>I help people and brands through creativity, technology, and digital skills while pursuing growth
-                        and balance in life. I am a student, creative, and aspiring cybersecurity professional. I am
-                        organized, adaptable, and detail-oriented, and I always strive to give my best in everything I
-                        do.</p>
+
+                    <p>
+                        I am a BS Cybersecurity student and a creative digital freelancer. I enjoy building websites,
+                        designing graphics, editing videos, and helping with online tasks. I am still growing and
+                        learning,
+                        but I always do my best to make every project clean, organized, and useful.
+                    </p>
+
                     <br>
-                    <p>I am passionate about technology, design, music, and content creation because I believe
-                        creativity and innovation can inspire people and create opportunities. I want to use my skills
-                        and experience to continue learning, helping others, and building projects that reflect who I
-                        am.</p>
+
+                    <p>
+                        I like combining creativity with technology. My goal is to help individuals, students, creators,
+                        and small businesses improve their online presence through simple, visual, and practical digital
+                        work.
+                    </p>
                 </div>
 
-                <div class="bento-card profile-card">
-                    <img src="https://picsum.photos/500/600?random=20" alt="Formal Portrait of Nath">
+                <div class="bento-card profile-card fade-in">
+                    <img src="Nathaniel.png" alt="Formal Portrait of Nath">
                 </div>
 
-                <div class="bento-card core-skills-card">
-                    <h3>My Core Skills</h3>
-                    <p>I specialize in graphic design, web design, content creation, and creative digital work,
-                        combining modern aesthetics with technical skills to create visually engaging projects. I create
-                        social media graphics, branding materials, and digital content while also building responsive
-                        websites using HTML, CSS, and JavaScript. I’m passionate about creative storytelling, visual
-                        identity, and continuously learning new tools and technologies.</p>
+                <div class="bento-card core-skills-card fade-in">
+                    <h3>My Main Skills</h3>
+                    <p>
+                        My main skills are web design, graphic design, video editing, and virtual assistance.
+                        I can create responsive websites using HTML, CSS, and JavaScript, design social media
+                        graphics and visual materials, edit short-form videos, and help with basic digital tasks
+                        such as data entry, research, file organization, and online support.
+                    </p>
 
                     <div class="skill-tags">
+                        <span>Web Design</span>
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JavaScript</span>
+                        <span>Graphic Design</span>
+                        <span>Video Editing</span>
                         <span>Virtual Assistance</span>
                         <span>Data Entry</span>
-                        <span>Communications</span>
-                        <span>Administrative Support</span>
-                        <span>Email Communication</span>
-                        <span>Artificial Intelligence</span>
                     </div>
                 </div>
 
-                <div class="bento-card services-list-card">
-                    <h3>Services Offered</h3>
-                    <p class="muted-text">But not limited to:</p>
-                    <ul class="trendy-list">
-                        <li>Graphic Design</li>
-                        <li>Canva & CapCut</li>
-                        <li>HTML/CSS</li>
-                        <li>Social Media Design</li>
-                        <li>Video Editing</li>
-                        <li>Web Design</li>
-                    </ul>
+                <div class="bento-card logo-showcase-card fade-in">
+                    <div class="logo-orbit">
+                        <div class="logo-scanline"></div>
+
+                        <svg class="side-logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                            <path class="side-logo-path" d="M32 72 V28 L68 72 V28" stroke="#e5e5e5" stroke-width="8"
+                                stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                            <circle class="side-logo-dot" cx="68" cy="28" r="6" fill="#ccff00" />
+                        </svg>
+                    </div>
+
+                    <div class="logo-card-text">
+                        <span>NATH_SYSTEM</span>
+                        <p>Creative digital work with a clean cyber-style identity.</p>
+                    </div>
                 </div>
 
-                <!-- Box 5: Tech Stack Icons -->
                 <div class="bento-card tools-card fade-in">
-                    <h3>Creative & Tech Arsenal</h3>
-                    <div class="skills-icons">
-                        <!-- Swapped to placehold.co for reliable dummy images -->
-                        <img src="https://placehold.co/80x80/171717/ccff00?text=HTML" alt="HTML" class="tool-icon">
-                        <img src="https://placehold.co/80x80/171717/ccff00?text=CANVA" alt="Canva" class="tool-icon">
-                        <img src="https://placehold.co/80x80/171717/ccff00?text=CAPCUT" alt="CapCut" class="tool-icon">
-                        <img src="https://placehold.co/80x80/171717/ccff00?text=GEMINI" alt="Gemini AI"
-                            class="tool-icon">
+                    <div class="tools-intro">
+                        <span class="tools-label">CREATIVE STACK</span>
+                        <h3>Tools That I Use</h3>
+                        <p>
+                            These are the main tools I use for designing visuals, editing content,
+                            building websites, and organizing digital work.
+                        </p>
+                    </div>
+
+                    <div class="tools-showcase">
+                        <div class="tool-module">
+                            <span class="tool-number">01</span>
+                            <h4>Canva</h4>
+                            <p>Graphics, posters, social media layouts, and simple brand visuals.</p>
+                        </div>
+
+                        <div class="tool-module">
+                            <span class="tool-number">02</span>
+                            <h4>CapCut</h4>
+                            <p>Short-form videos, reels, captions, transitions, and basic edits.</p>
+                        </div>
+
+                        <div class="tool-module">
+                            <span class="tool-number">03</span>
+                            <h4>AI Tools</h4>
+                            <p>Idea support, content planning, writing help, and faster workflow.</p>
+                        </div>
+
+                        <div class="tool-module">
+                            <span class="tool-number">04</span>
+                            <h4>VS Code</h4>
+                            <p>HTML, CSS, JavaScript, website editing, and frontend development.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Upgraded Capabilities Section -->
+        <section id="services" class="services">
+            <h2 class="section-title">Services I Offer</h2>
+
+            <div class="services-grid">
+
+                <div class="service-card cyber-card fade-in">
+                    <div class="card-glare"></div>
+                    <div class="card-icon">[01]</div>
+                    <h3>Web Design & Development</h3>
+                    <p>
+                        I create responsive websites using HTML, CSS, and JavaScript.
+                        I focus on clean layouts, smooth interactions, and designs that work well
+                        on both desktop and mobile.
+                    </p>
+                    <div class="card-tech-stack">
+                        <span>HTML</span><span>CSS</span><span>JavaScript</span>
+                    </div>
+                </div>
+
+                <div class="service-card cyber-card fade-in">
+                    <div class="card-glare"></div>
+                    <div class="card-icon">[02]</div>
+                    <h3>Graphic Design</h3>
+                    <p>
+                        I design posters, social media graphics, branding materials, thumbnails,
+                        and other visual content for personal, school, business, or online use.
+                    </p>
+                    <div class="card-tech-stack">
+                        <span>Canva</span><span>Layout</span><span>Visuals</span>
+                    </div>
+                </div>
+
+                <div class="service-card cyber-card fade-in">
+                    <div class="card-glare"></div>
+                    <div class="card-icon">[03]</div>
+                    <h3>Video Editing</h3>
+                    <p>
+                        I edit short-form videos, reels, school content, and simple promotional videos
+                        with clean pacing, captions, transitions, and visual style.
+                    </p>
+                    <div class="card-tech-stack">
+                        <span>CapCut</span><span>Reels</span><span>Shorts</span>
+                    </div>
+                </div>
+
+                <div class="service-card cyber-card fade-in">
+                    <div class="card-glare"></div>
+                    <div class="card-icon">[04]</div>
+                    <h3>Virtual Assistance</h3>
+                    <p>
+                        I can help with digital tasks such as data entry, file organization,
+                        research, email support, basic admin work, and online content support.
+                    </p>
+                    <div class="card-tech-stack">
+                        <span>Data Entry</span><span>Research</span><span>Admin</span>
                     </div>
                 </div>
 
             </div>
         </section>
 
-        <!-- 2. NEW: Services Section -->
-        <section id="services" class="services">
-            <h2 class="section-title">Capabilities</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <h3>01. Visual & UI Design</h3>
-                    <p>Crafting high-contrast layouts, acid-graphics posters, and modern, intuitive user interfaces.</p>
-                </div>
-                <div class="service-card">
-                    <h3>02. Web Development</h3>
-                    <p>Building responsive, grid-based websites using clean HTML, CSS, and interactive elements.</p>
-                </div>
-                <div class="service-card">
-                    <h3>03. Security & Tech</h3>
-                    <p>Analyzing network structures, configuring environments, and implementing secure architectural
-                        practices.</p>
-                </div>
-            </div>
-        </section>
+        <!-- Upgraded Bottom Layout (Terminal Sidebar) -->
+        <div class="bottom-layout fade-in">
+            <section class="content cyber-panel">
+                <h2>A Creative Digital Freelancer</h2>
 
-        <!-- 3. UPDATED: Two-Column Layout Wrapper -->
-        <div id="about" class="bottom-layout">
-            <section class="content">
-                <h2>Responsive Architecture</h2>
                 <p>
-                    This webpage automatically adapts to desktop, tablet, and mobile devices using modern CSS Grid and
-                    Flexbox. Resize the window to see the layout shift seamlessly.
+                    I focus on practical digital work that looks clean, organized, and easy to understand.
+                    Whether it is a website, graphic design, video edit, or online task, I try to make the final
+                    output visually strong and useful for the person or brand I am helping.
                 </p>
             </section>
-
-            <aside class="sidebar">
-                <h3>Latest News</h3>
-                <p>Currently setting up secure testing environments and experimenting with fresh UI layouts.</p>
+            <aside class="sidebar terminal-sidebar">
+                <div class="terminal-header">
+                    <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                    <span class="term-title">system_logs.exe // <span id="live-clock"
+                            style="color: var(--accent-acid);">00:00:00</span></span>
+                </div>
+                <div class="terminal-body">
+                    <p class="log-entry">> Designing responsive websites with HTML, CSS, and JavaScript...</p>
+                    <p class="log-entry">> Creating graphics, layouts, and visual content...</p>
+                    <p class="log-entry">> Editing short-form videos and digital materials...</p>
+                    <p class="log-entry">> Supporting clients with organized online tasks...</p>
+                    <p class="log-entry blinking-cursor">_</p>
+                </div>
             </aside>
         </div>
 
-        <section id="certificates" class="certificatebg fade-in">
+        <!-- Virtual Assistance Modules Section (Cyber Data Nodes) -->
+        <section id="va-skills" class="va-dashboard">
             <div class="Certtext">
-                <h2 class="section-title">My Certificates</h2>
-                <p class="certp">These are the verified credentials I have collected so far.</p>
+                <h2 class="section-title">Things about me</h2>
+                <p class="certp">Continuous upskilling through specialized cybersecurity and tech certifications.</p>
             </div>
 
-            <div class="options">
-                <div class="option active" style="--optionImage: url('https://picsum.photos/800/600?random=30');">
-                    <div class="shadow-overlay"></div>
-                    <div class="label">
-                        <div class="info">
-                            <div class="main">CompTIA Security+</div>
+            <div class="va-grid">
+                <div class="va-card fade-in">
+                    <div class="va-scanline"></div>
+                    <div class="va-card-header">
+                        <span class="va-status-dot"></span>
+                        <h3>[01] Creative & UI Design</h3>
+                    </div>
+                    <div class="va-content">
+                        <div class="va-item">
+                            <h4>Visual Identity</h4>
+                            <p>Crafting high-contrast Y2K aesthetics, acid graphics, and striking digital art posters.
+                            </p>
+                        </div>
+                        <div class="va-item">
+                            <h4>Video Production</h4>
+                            <p>Editing dynamic short-form content, social media templates, and motion graphics.</p>
+                        </div>
+                        <div class="va-item">
+                            <h4>UI/UX Prototyping</h4>
+                            <p>Designing intuitive, user-centric interfaces and wireframes for web and mobile platforms.
+                            </p>
+                        </div>
+                        <div class="va-item">
+                            <h4>Content Layout</h4>
+                            <p>Structuring engaging social media feeds and digital branding materials.</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="option" style="--optionImage: url('https://picsum.photos/800/600?random=31');">
-                    <div class="shadow-overlay"></div>
-                    <div class="label">
-                        <div class="info">
-                            <div class="main">Security Management</div>
+                <div class="va-card fade-in">
+                    <div class="va-scanline"></div>
+                    <div class="va-card-header">
+                        <span class="va-status-dot"></span>
+                        <h3>[02] Dev & Scripting</h3>
+                    </div>
+                    <div class="va-content">
+                        <div class="va-item">
+                            <h4>Frontend Architecture</h4>
+                            <p>Building responsive, grid-based web layouts from scratch using HTML and CSS.</p>
+                        </div>
+                        <div class="va-item">
+                            <h4>Object-Oriented Programming</h4>
+                            <p>Developing and structuring logic-driven applications using C++ and Python.</p>
+                        </div>
+                        <div class="va-item">
+                            <h4>Code Optimization</h4>
+                            <p>Debugging, streamlining, and simplifying complex code structures for better performance.
+                            </p>
+                        </div>
+                        <div class="va-item">
+                            <h4>Modern Integration</h4>
+                            <p>Implementing seamless web animations and interactive user elements.</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="option" style="--optionImage: url('https://picsum.photos/800/600?random=32');">
-                    <div class="shadow-overlay"></div>
-                    <div class="label">
-                        <div class="info">
-                            <div class="main">Cybersecurity Threat Intel</div>
-                        </div>
+                <div class="va-card fade-in">
+                    <div class="va-scanline"></div>
+                    <div class="va-card-header">
+                        <span class="va-status-dot"></span>
+                        <h3>[03] Security Foundations</h3>
                     </div>
-                </div>
-
-                <div class="option" style="--optionImage: url('https://picsum.photos/800/600?random=33');">
-                    <div class="shadow-overlay"></div>
-                    <div class="label">
-                        <div class="info">
-                            <div class="main">Prompt Engineering</div>
+                    <div class="va-content">
+                        <div class="va-item">
+                            <h4>Linux Environments</h4>
+                            Learning Linux environments through Ubuntu and WSL while practicing command-line tools and
+                            system navigation.
+                        </div>
+                        <div class="va-item">
+                            <h4>Network Analysis</h4>
+                            <p>Using Wireshark to explore packet analysis and understand how network traffic flows.
+                            </p>
+                        </div>
+                        <div class="va-item">
+                            <h4>Vulnerability Scanning</h4>
+                            <p>Learning network discovery and host enumeration techniques using tools such as Nmap.</p>
+                        </div>
+                        <div class="va-item">
+                            <h4>System Mechanics</h4>
+                            <p>Developing a deeper understanding of computer systems, networking, and digital
+                                infrastructure.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="portfolio" class="portfolio">
-            <h2 class="section-title">Selected Works</h2>
+        <!-- Upgraded Certificates Section (Data Matrix with Lightbox) -->
+        <section id="certificates" class="cert-matrix fade-in">
+            <div class="Certtext">
+                <h2 class="section-title">Verified Credentials</h2>
+                <p class="certp">Continuous upskilling and getting tech certifications.</p>
+            </div>
 
-            <div class="masonry-gallery">
-                <div class="masonry-item">
-                    <img src="https://picsum.photos/600/800?random=1" alt="Y2K Poster Design">
+            <div class="cert-grid">
+                <!-- Module 01 -->
+                <div class="cert-card" style="--bg-image: url('linkdncert1.png');"
+                    onclick="openCert('linkdncert1.png', 'SIEM Architecture')">
+                    <div class="cert-overlay"></div>
+                    <div class="cert-header">
+                        <span class="cert-status"><span class="blink-dot"></span>VERIFIED</span>
+                        <span class="cert-date">MAR 05 2026</span>
+                    </div>
+                    <div class="cert-content">
+                        <h3>SIEM Architecture</h3>
+                        <div class="cert-barcode">||| |||| || |||||</div>
+                        <div class="cert-action">[ VIEW CERTIFICATE ↗ ]</div>
+                    </div>
                 </div>
 
-                <div class="masonry-item">
-                    <iframe width="100%" height="350"
-                        src="https://www.youtube.com/embed/gniKMEEqOJU?controls=0&mute=1&autoplay=1&loop=1"
-                        title="Video Edit Placeholder" frameborder="0" allow="autoplay; encrypted-media"
-                        allowfullscreen></iframe>
+                <!-- Module 02 -->
+                <div class="cert-card" style="--bg-image: url('linkdncerts.png');"
+                    onclick="openCert('linkdncerts.png', 'CompTIA Tech+ FC0-U71')">
+                    <div class="cert-overlay"></div>
+                    <div class="cert-header">
+                        <span class="cert-status"><span class="blink-dot"></span>VERIFIED</span>
+                        <span class="cert-date">JAN 20 2026</span>
+                    </div>
+                    <div class="cert-content">
+                        <h3>CompTIA Tech+ FC0-U71</h3>
+                        <div class="cert-barcode">|||| || |||| ||||</div>
+                        <div class="cert-action">[ VIEW CERTIFICATE ↗ ]</div>
+                    </div>
                 </div>
 
-                <div class="masonry-item">
-                    <img src="https://picsum.photos/600/900?random=2" alt="Cyber Sigilism Art">
+                <!-- Module 03 -->
+                <div class="cert-card" style="--bg-image: url('linkdncert3.png');"
+                    onclick="openCert('linkdncert3.png', 'Prompt Engineering')">
+                    <div class="cert-overlay"></div>
+                    <div class="cert-header">
+                        <span class="cert-status"><span class="blink-dot"></span>VERIFIED</span>
+                        <span class="cert-date">DEC 24 2025</span>
+                    </div>
+                    <div class="cert-content">
+                        <h3>Prompt Engineering</h3>
+                        <div class="cert-barcode">|| ||||| ||| ||||</div>
+                        <div class="cert-action">[ VIEW CERTIFICATE ↗ ]</div>
+                    </div>
                 </div>
 
-                <div class="masonry-item">
-                    <img src="https://picsum.photos/600/700?random=3" alt="Acid Graphics Poster">
-                </div>
-
-                <div class="masonry-item">
-                    <img src="https://picsum.photos/600/850?random=4" alt="Social Media Layout">
-                </div>
-
-                <div class="masonry-item">
-                    <img src="https://picsum.photos/600/600?random=5" alt="Digital Art Poster">
-                </div>
-
-                <div class="masonry-item">
-                    <img src="https://picsum.photos/600/750?random=6" alt="Y2K Aesthetic Concept">
-                </div>
-
-                <div class="masonry-item">
-                    <img src="https://picsum.photos/600/500?random=7" alt="WARD Sierra AI Interface">
-                </div>
-
-                <div class="masonry-item">
-                    <img src="https://picsum.photos/600/450?random=8" alt="Healthcare UI Food Scanner">
-                </div>
-
-                <div class="masonry-item">
-                    <img src="https://picsum.photos/600/650?random=9" alt="Cyber-sigilism Concept">
-                </div>
-
-                <div class="masonry-item">
-                    <img src="https://picsum.photos/600/800?random=10" alt="Acid Graphics Edit">
-                </div>
-
-                <div class="masonry-item">
-                    <img src="https://picsum.photos/600/550?random=11" alt="Nathsmagnolias Portfolio Asset">
+                <!-- Module 04 -->
+                <div class="cert-card" style="--bg-image: url('linkdncert2.png');"
+                    onclick="openCert('linkdncert2.png', 'Vulnerability Mgmt.')">
+                    <div class="cert-overlay"></div>
+                    <div class="cert-header">
+                        <span class="cert-status"><span class="blink-dot"></span>VERIFIED</span>
+                        <span class="cert-date">SEP 11 2025</span>
+                    </div>
+                    <div class="cert-content">
+                        <h3>Vulnerability Mgmt.</h3>
+                        <div class="cert-barcode">||||| || |||| |||</div>
+                        <div class="cert-action">[ VIEW CERTIFICATE ↗ ]</div>
+                    </div>
                 </div>
             </div>
-        </section>
 
-        <section id="video-showcase" class="video-showcase fade-in">
-            <canvas id="video-canvas" class="section-canvas"></canvas>
 
-            <div class="Certtext">
 
-                <section id="video-showcase" class="video-showcase fade-in">
-                    <div class="Certtext">
-                        <h2 class="section-title">Vertical Media Transmissions</h2>
-                        <p class="certp">Short-form content, motion graphics, and social media templates.</p>
-                    </div>
-
-                    <div class="vertical-command-grid">
-                        <div class="video-monitor">
-                            <div class="monitor-bar"><span class="rec-dot"></span> TIKTOK_01</div>
-                            <div class="vertical-iframe-wrapper">
-                                <iframe src="https://player.vimeo.com/video/1195560321?background=1" frameborder="0"
-                                    allow="autoplay; fullscreen" loading="lazy"></iframe>
-                            </div>
-                        </div>
-
-                        <div class="video-monitor">
-                            <div class="monitor-bar"><span class="rec-dot"></span> REELS_02</div>
-                            <div class="vertical-iframe-wrapper">
-                                <iframe src="https://player.vimeo.com/video/1195560322?background=1" frameborder="0"
-                                    allow="autoplay; fullscreen" loading="lazy"></iframe>
-                            </div>
-                        </div>
-
-                        <div class="video-monitor">
-                            <div class="monitor-bar"><span class="rec-dot"></span> SHORTS_03</div>
-                            <div class="vertical-iframe-wrapper">
-                                <iframe src="https://player.vimeo.com/video/1195560820?background=1" frameborder="0"
-                                    allow="autoplay; fullscreen" loading="lazy"></iframe>
-                            </div>
-                        </div>
-
-                        <div class="video-monitor">
-                            <div class="monitor-bar"><span class="rec-dot"></span> EDIT_04</div>
-                            <div class="vertical-iframe-wrapper">
-                                <iframe src="https://player.vimeo.com/video/1195560323?background=1" frameborder="0"
-                                    allow="autoplay; fullscreen" loading="lazy"></iframe>
-                            </div>
-                        </div>
-
-                        <div class="video-monitor">
-                            <div class="monitor-bar"><span class="rec-dot"></span> EDIT_05</div>
-                            <div class="vertical-iframe-wrapper">
-                                <iframe src="https://player.vimeo.com/video/1195560320?background=1" frameborder="0"
-                                    allow="autoplay; fullscreen" loading="lazy"></iframe>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <div id="lightbox" class="lightbox">
-                    <span class="close-lightbox">&times;</span>
-
-                    <button class="nav-arrow prev-arrow">[&larr;] PREV</button>
-
-                    <div class="lightbox-wrapper">
-                        <img class="lightbox-content" id="lightbox-img">
-                    </div>
-
-                    <button class="nav-arrow next-arrow">NEXT [&rarr;]</button>
+            <!-- Motherboard Trace Timeline -->
+            <section id="experience" class="circuit-section fade-in">
+                <div class="Certtext">
+                    <h2 class="section-title">My Journey of Learning</h2>
+                    <p class="certp">Academic progression, architectural deployments, and project history.</p>
                 </div>
 
-                <section id="contact" class="contact">
-                    <canvas id="contact-canvas" class="section-canvas"></canvas>
-                    <h2 class="section-title">Initiate Connection</h2>
+                <div class="circuit-container">
+                    <!-- The live neon trace line -->
+                    <div class="circuit-trace-track">
+                        <div class="circuit-trace-fill" id="trace-fill"></div>
+                    </div>
 
-                    <div class="contact-wrapper">
-                        <form action="https://formspree.io/f/xkoaleey" method="POST" class="contact-form">
-                                                            <input type="hidden" name="_next"
-                                value="https://nathgen-del.github.io/nathu.studios.io/#home">
-
-                            <div class="input-group">
-                                <input type="text" id="name" name="name" required>
-                                <label for="name">Name / Handle</label>
+                    <!-- Node 1: Left -->
+                    <div class="circuit-block left">
+                        <div class="circuit-pad"></div>
+                        <div class="circuit-branch"></div>
+                        <div class="circuit-card cyber-card">
+                            <span class="timeline-date">Mid 2026</span>
+                            <h3>Applied Frontend & UI/UX</h3>
+                            <h4>Web Development Projects</h4>
+                            <p>Developed responsive academic and personal web projects while practicing real-world
+                                design workflows and project planning.</p>
+                            <div class="card-tech-stack"><span>HTML/CSS</span><span>Figma</span><span>Time Mgmt</span>
                             </div>
-
-                            <div class="input-group">
-                                <input type="email" id="email" name="email" required>
-                                <label for="email">Email / Comm-Link</label>
-                            </div>
-
-                            <div class="input-group">
-                                <textarea id="message" name="message" rows="5" required></textarea>
-                                <label for="message">Transmission Data</label>
-                            </div>
-
-                            <button type="submit" class="btn">Send Transmission</button>
-                        </form>
-
-                        <div class="contact-info">
-                            <h3>System Status: <span style="color: var(--accent-acid);">Online</span></h3>
-                            <p>Ready for new deployments, architectural testing, and digital design collaborations.
-                                Reach out to
-                                initiate a secure connection.</p>
-
-                            <ul class="social-links">
-                                <li><a href="#">GitHub</a></li>
-                                <li><a href="#">LinkedIn</a></li>
-                                <li><a href="#">Behance</a></li>
-                            </ul>
                         </div>
                     </div>
-                </section>
+
+                    <!-- Node 2: Right -->
+                    <div class="circuit-block right">
+                        <div class="circuit-pad"></div>
+                        <div class="circuit-branch"></div>
+                        <div class="circuit-card cyber-card">
+                            <span class="timeline-date">Late 2025 – Early 2026</span>
+                            <h3>Independent Tech Upskilling</h3>
+                            <h4>Continuous Value Expansion</h4>
+                            <p>Actively hunted specialized certifications outside of standard academic requirements to
+                                increase freelance value. Earned credentials in Vulnerability Management, Prompt
+                                Engineering, CompTIA Tech+, and SIEM architecture.</p>
+                            <div class="card-tech-stack"><span>SIEM</span><span>CompTIA</span><span>Prompt Eng</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Node 3: Left -->
+                    <div class="circuit-block left">
+                        <div class="circuit-pad"></div>
+                        <div class="circuit-branch"></div>
+                        <div class="circuit-card cyber-card">
+                            <span class="timeline-date">August 2025</span>
+                            <h3>BS Cybersecurity Initiation</h3>
+                            <h4>FEU Institute of Technology</h4>
+                            <p>Began formal Studies in cybersecurity and network topologies (Cisco Packet
+                                Tracer).
+                                Balancing a demanding academic schedule while independently managing remote freelance
+                                client
+                                workloads.</p>
+                            <div class="card-tech-stack"><span>Net Topology</span><span>Security Protocols</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Node 4: Right -->
+                    <div class="circuit-block right">
+                        <div class="circuit-pad"></div>
+                        <div class="circuit-branch"></div>
+                        <div class="circuit-card cyber-card">
+                            <span class="timeline-date">The Foundation</span>
+                            <h3>Freelance Media & VA Support</h3>
+                            <h4>Creative Execution</h4>
+                            <p>Established a foundation in digital content creation by delivering short-form video edits
+                                and
+                                graphic design assets for independent clients. Developed the core soft skills of remote
+                                communication and rapid task execution.</p>
+                            <div class="card-tech-stack"><span>CapCut</span><span>Canva</span><span>Client
+                                    Relations</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="portfolio" class="portfolio">
+                <h2 class="section-title">My Graphic Design works</h2>
+
+                <div class="masonry-gallery">
+                    <div class="masonry-item">
+                        <img src="upamelist.png" alt="Y2K Poster Design">
+                    </div>
+                    <div class="masonry-item">
+                        <iframe width="100%" height="350"
+                            src="https://www.youtube.com/embed/gniKMEEqOJU?controls=0&mute=1&autoplay=1&loop=1"
+                            title="Video Edit Placeholder" frameborder="0" allow="autoplay; encrypted-media"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="masonry-item">
+                        <img src="Natme.png" alt="Cyber Sigilism Art">
+                    </div>
+                    <div class="masonry-item">
+                        <img src="CKY.png" alt="Acid Graphics Poster">
+                    </div>
+                    <div class="masonry-item">
+                        <img src="BL-a.png" alt="Social Media Layout">
+                    </div>
+                    <div class="masonry-item">
+                        <img src="GT3R5.png" alt="Digital Art Poster">
+                    </div>
+                    <div class="masonry-item">
+                        <img src="KIM90.png" alt="Y2K Aesthetic Concept">
+                    </div>
+                    <div class="masonry-item">
+                        <img src="merce1.png" alt="WARD Sierra AI Interface">
+                    </div>
+                    <div class="masonry-item">
+                        <img src="PORCHES.png" alt="Healthcare UI Food Scanner">
+                    </div>
+                    <div class="masonry-item">
+                        <img src="SF90.png" alt="Cyber-sigilism Concept">
+                    </div>
+                    <div class="masonry-item">
+                        <img src="RB21.png" alt="Acid Graphics Edit">
+                    </div>
+                    <div class="masonry-item">
+                        <img src="NYC1.png" alt="Nathsmagnolias Portfolio Asset">
+                    </div>
+                </div>
+            </section>
+
+            <section id="video-showcase" class="video-showcase fade-in">
+                <canvas id="video-canvas" class="section-canvas"></canvas>
+
+                <div class="Certtext">
+                    <h2 class="section-title">Client Video Commissions</h2>
+                    <p class="certp">High-retention short-form video content and motion graphics optimized for TikTok,
+                        Reels, and Shorts.</p>
+                </div>
+
+                <div class="vertical-command-grid">
+                    <div class="video-monitor">
+                        <div class="monitor-bar"><span class="rec-dot"></span> TIKTOK_01</div>
+                        <div class="vertical-iframe-wrapper">
+                            <iframe src="https://player.vimeo.com/video/1195560321?background=1" frameborder="0"
+                                allow="autoplay; fullscreen" loading="lazy"></iframe>
+                        </div>
+                    </div>
+
+                    <div class="video-monitor">
+                        <div class="monitor-bar"><span class="rec-dot"></span> REELS_02</div>
+                        <div class="vertical-iframe-wrapper">
+                            <iframe src="https://player.vimeo.com/video/1195560322?background=1" frameborder="0"
+                                allow="autoplay; fullscreen" loading="lazy"></iframe>
+                        </div>
+                    </div>
+
+                    <div class="video-monitor">
+                        <div class="monitor-bar"><span class="rec-dot"></span> SHORTS_03</div>
+                        <div class="vertical-iframe-wrapper">
+                            <iframe src="https://player.vimeo.com/video/1195560820?background=1" frameborder="0"
+                                allow="autoplay; fullscreen" loading="lazy"></iframe>
+                        </div>
+                    </div>
+
+                    <div class="video-monitor">
+                        <div class="monitor-bar"><span class="rec-dot"></span> EDIT_04</div>
+                        <div class="vertical-iframe-wrapper">
+                            <iframe src="https://player.vimeo.com/video/1195560323?background=1" frameborder="0"
+                                allow="autoplay; fullscreen" loading="lazy"></iframe>
+                        </div>
+                    </div>
+
+                    <div class="video-monitor">
+                        <div class="monitor-bar"><span class="rec-dot"></span> EDIT_05</div>
+                        <div class="vertical-iframe-wrapper">
+                            <iframe src="https://player.vimeo.com/video/1195560320?background=1" frameborder="0"
+                                allow="autoplay; fullscreen" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact" class="contact">
+                <canvas id="contact-canvas" class="section-canvas"></canvas>
+                <h2 class="section-title">Connect with Me!</h2>
+
+                <div class="contact-wrapper">
+                    <form action="https://formspree.io/f/xkoaleey" method="POST" class="contact-form">
+                        <input type="hidden" name="_subject" value="New message from Nath Web Studio">
+
+                        <div class="input-group">
+                            <input type="text" id="name" name="name" required autocomplete="name">
+                            <label for="name">Your Name</label>
+                        </div>
+
+                        <div class="input-group">
+                            <input type="email" id="email" name="email" required autocomplete="email">
+                            <label for="email">Email / Gmail</label>
+                        </div>
+
+                        <div class="input-group">
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                            <label for="message">Message</label>
+                        </div>
+
+                        <button type="submit" class="btn">Send Email</button>
+                    </form>
+
+                    <div class="contact-info">
+                        <h3>Status: <span style="color: var(--accent-acid);">Open for Projects</span></h3>
+
+                        <p>
+                            I am open to simple websites, graphic design work, video edits, and virtual assistance
+                            tasks.
+                            Send me a message and we can discuss what you need, your deadline, and how I can help.
+                        </p>
+
+                        <ul class="social-links">
+                            <li>
+                                <a href="https://www.upwork.com/freelancers/~017d1e29cdc2d6a953" target="_blank"
+                                    rel="noopener noreferrer">
+                                    Upwork
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.linkedin.com/in/jhon-nathaniel-a-genato-3939a0380/" target="_blank"
+                                    rel="noopener noreferrer">
+                                    LinkedIn
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.behance.net/nathwebstudio" target="_blank"
+                                    rel="noopener noreferrer">
+                                    Behance
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
     </main>
 
-    <footer>
-        <p>&copy; 2026 Nath Web Studio. All Rights Reserved.</p>
+
+    <footer class="cyber-footer">
+        <div class="footer-grid">
+
+            <div class="footer-sys">
+                <span class="sys-dot"></span>
+                <span class="sys-text-foot">OPEN FOR COLLABORATION</span>
+                <span class="divider">//</span>
+                <span class="sys-text-foot">MNL [ <span id="clock-mnl" style="color: var(--accent-acid);">00:00</span>
+                    ]</span>
+                <span class="divider">|</span>
+                <span class="sys-text-foot">NY [ <span id="clock-ny" style="color: var(--accent-acid);">00:00</span>
+                    ]</span>
+                <span class="divider">|</span>
+                <span class="sys-text-foot">LDN [ <span id="clock-ldn" style="color: var(--accent-acid);">00:00</span>
+                    ]</span>
+            </div>
+
+            <script>
+                function startWorldClocks() {
+                    const clockMnl = document.getElementById('clock-mnl');
+                    const clockNy = document.getElementById('clock-ny');
+                    const clockLdn = document.getElementById('clock-ldn');
+
+                    if (!clockMnl) return;
+
+                    function updateTime() {
+                        const now = new Date();
+                        // Tinanggal ang seconds para malinis tignan ang 3 orasan
+                        const options = {
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            hour12: true
+                        };
+
+                        clockMnl.textContent = new Intl.DateTimeFormat('en-US', { ...options, timeZone: 'Asia/Manila' }).format(now);
+                        clockNy.textContent = new Intl.DateTimeFormat('en-US', { ...options, timeZone: 'America/New_York' }).format(now);
+                        clockLdn.textContent = new Intl.DateTimeFormat('en-US', { ...options, timeZone: 'Europe/London' }).format(now);
+                    }
+
+                    updateTime();
+                    setInterval(updateTime, 1000);
+                }
+                startWorldClocks();
+            </script>
+            <div class="footer-links">
+                <a href="https://www.upwork.com/freelancers/~017d1e29cdc2d6a953" target="_blank">UPWORK</a>
+                <a href="https://www.linkedin.com/in/jhon-nathaniel-a-genato-3939a0380/" target="_blank">LINKEDIN</a>
+                <a href="https://www.behance.net/nathwebstudio" target="_blank">BEHANCE</a>
+            </div>
+
+            <div class="footer-action">
+                <a href="#home" class="return-top">[ Return to that top ↗ ]</a>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 NathWeb Studio. All rights reserved. Website designed and developed by Nathaniel Genato and
+                Ai-Assisted Development.</p>
+        </div>
     </footer>
-    <script src="script.js"></script>
-</body>
-<button id="global-theme-toggle" class="theme-toggle" aria-label="Toggle System Theme">
-    <div class="toggle-track">
-        <span class="toggle-indicator"></span>
+
+    <div id="lightbox" class="lightbox">
+        <span class="close-lightbox">&times;</span>
+        <button class="nav-arrow prev-arrow">[ &lt; ] PREV</button>
+        <div class="lightbox-wrapper">
+            <img class="lightbox-content" id="lightbox-img">
+        </div>
+        <button class="nav-arrow next-arrow">Next [ &gt; ]</button>
     </div>
-    <span class="toggle-label">SYSTEM_OVERRIDE</span>
-</button>
+
+    <script src="script.js"></script>
+    <div id="cert-modal" class="cert-modal" onclick="closeCert(event)">
+        <div class="cert-modal-close" id="cert-close-btn">[ X ] Click to Close</div>
+
+        <div class="cert-modal-content">
+            <!-- The new dynamic title -->
+            <h3 id="cert-modal-title" class="cert-modal-title">SYSTEM_LOG</h3>
+
+            <!-- The zoomable image container -->
+            <div class="cert-img-wrapper" onclick="toggleZoom(event)">
+                <img id="cert-modal-img" src="" alt="Verified Credential">
+            </div>
+        </div>
+    </div>
+</body>
 
 </html>
