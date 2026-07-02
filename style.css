@@ -2173,12 +2173,14 @@ html[data-theme="light"] .timeline-date {
    UPGRADED CYBER FOOTER
    ========================================== */
 .cyber-footer {
-    border-top: 1px solid var(--border-color);
-    background: #050505;
-    padding: 3rem 2rem 2rem 2rem;
-    font-family: monospace;
-    position: relative;
-    z-index: 10;
+    width: 100% !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+    /* Prevents side-scrolling bugs */
 }
 
 .footer-grid {
@@ -2929,19 +2931,33 @@ html[data-theme="light"] .cursor-ring.hover-active {
 /* Mobile */
 @media (max-width: 850px) {
     .site-topbar {
-        flex-direction: column;
-        align-items: center;
-        padding: 1rem;
-        gap: 1rem;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important; /* Anchors the right side to prevent pinching */
+        width: 100% !important;
+        margin: 0 !important;
+        border-radius: 0 !important; /* Kills the curves causing the gap illusion */
+        box-sizing: border-box !important;
+        padding: 1rem 0.5rem !important; /* Tighter padding for mobile screens */
     }
 
+    /* 2. RESPONSIVE LINK STACKING (NO HAMBURGER MENU) */
     .topbar-nav ul {
-        justify-content: center;
-        gap: 1rem;
+        display: flex !important;
+        flex-wrap: wrap !important; /* Forces links to wrap to the next line naturally */
+        justify-content: center !important;
+        align-items: center !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0.5rem 0 0 0 !important;
+        gap: 8px 12px !important; /* Adds strict, clean spacing between the wrapped links */
     }
 
+    /* Shrinks the text slightly so it fits perfectly on phone screens */
     .topbar-nav a {
-        font-size: 0.75rem;
+        font-size: 0.75rem !important; 
+        padding: 4px 6px !important;
     }
 }
 
