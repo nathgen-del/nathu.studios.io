@@ -3301,10 +3301,27 @@ html[data-theme="light"] .cursor-ring.hover-active {
 /* ==========================================
    MOBILE DOCK (HIDDEN ON DESKTOP)
    ========================================== */
+/* 3. THE FLOATING ICON DOCK */
 .mobile-dock {
-    display: none;
+    display: flex;
+    position: fixed !important;
+    top: auto !important;
+    /* Forces it to ignore the top of the screen */
+    bottom: 25px !important;
+    /* Locks it securely to the bottom */
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    background: rgba(15, 15, 15, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+    border-radius: 50px;
+    padding: 12px 20px;
+    gap: 15px;
+    z-index: 999999 !important;
+    /* Massive number guarantees NOTHING overlaps it */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
 }
-
 @media (max-width: 850px) {
 
     /* 1. CLEAN TOP HEADER (Logo Only, No Gaps) */
