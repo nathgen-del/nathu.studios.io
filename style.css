@@ -3303,28 +3303,12 @@ html[data-theme="light"] .cursor-ring.hover-active {
    ========================================== */
 /* 3. THE FLOATING ICON DOCK */
 .mobile-dock {
-    display: flex;
-    position: fixed !important;
-    top: auto !important;
-    /* Forces it to ignore the top of the screen */
-    bottom: 25px !important;
-    /* Locks it securely to the bottom */
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    background: rgba(15, 15, 15, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid var(--border-color);
-    border-radius: 50px;
-    padding: 12px 20px;
-    gap: 15px;
-    z-index: 999999 !important;
-    /* Massive number guarantees NOTHING overlaps it */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    display: none !important;
 }
+
 @media (max-width: 850px) {
 
-    /* 1. CLEAN TOP HEADER (Logo Only, No Gaps) */
+     /* 1. CLEAN TOP HEADER (Logo Only, No Gaps) */
     .site-topbar {
         position: fixed !important;
         top: 0 !important;
@@ -3346,43 +3330,41 @@ html[data-theme="light"] .cursor-ring.hover-active {
 
     /* 3. THE FLOATING ICON DOCK */
     .mobile-dock {
-        display: flex;
-        position: fixed;
-        bottom: 20px;
-        /* Floats 20px above the bottom screen edge */
-        left: 50%;
-        transform: translateX(-50%);
-        /* Centers it perfectly */
-        background: rgba(15, 15, 15, 0.85);
-        /* Dark Glassmorphism */
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid var(--border-color);
-        border-radius: 50px;
-        /* Creates the sleek pill shape */
-        padding: 12px 20px;
-        gap: 15px;
-        /* Spaces out the 6 icons perfectly */
-        z-index: 99999;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+        display: flex !important;
+        position: fixed !important;
+        top: auto !important;
+        bottom: 25px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        background: rgba(15, 15, 15, 0.85) !important;
+        backdrop-filter: blur(12px) !important;
+        -webkit-backdrop-filter: blur(12px) !important;
+        border: 1px solid var(--border-color) !important;
+        border-radius: 50px !important;
+        padding: 0 20px !important;
+        gap: 15px !important;
+        z-index: 999999 !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8) !important;
+        height: 60px !important;
+        /* THE CURE: Forces it to stay a thin pill! */
+        align-items: center !important;
     }
 
     /* 4. STYLE THE ICONS */
     .mobile-dock a {
-        color: var(--text-muted);
-        width: 24px;
-        height: 24px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: color 0.3s ease, transform 0.3s ease;
+        color: var(--text-muted) !important;
+        width: 24px !important;
+        height: 24px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        transition: color 0.3s ease, transform 0.3s ease !important;
     }
 
     .mobile-dock a svg {
-        width: 100%;
-        height: 100%;
+        width: 100% !important;
+        height: 100% !important;
     }
-
     /* Hover & Active State */
     .mobile-dock a:hover,
     .mobile-dock a:active {
