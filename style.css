@@ -3297,3 +3297,93 @@ html[data-theme="light"] .cursor-ring.hover-active {
 .logo-orbit::after {
     border-radius: 50% !important;
 }
+
+/* ==========================================
+   MOBILE DOCK (HIDDEN ON DESKTOP)
+   ========================================== */
+.mobile-dock {
+    display: none;
+}
+
+@media (max-width: 850px) {
+
+    /* 1. CLEAN TOP HEADER (Logo Only, No Gaps) */
+    .site-topbar {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        margin: 0 !important;
+        border-radius: 0 !important;
+        /* Fixes the corner gap */
+        box-sizing: border-box !important;
+        padding: 1rem !important;
+        z-index: 10000;
+    }
+
+    /* 2. HIDE THE OLD TEXT LINKS */
+    .topbar-nav {
+        display: none !important;
+    }
+
+    /* 3. THE FLOATING ICON DOCK */
+    .mobile-dock {
+        display: flex;
+        position: fixed;
+        bottom: 20px;
+        /* Floats 20px above the bottom screen edge */
+        left: 50%;
+        transform: translateX(-50%);
+        /* Centers it perfectly */
+        background: rgba(15, 15, 15, 0.85);
+        /* Dark Glassmorphism */
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--border-color);
+        border-radius: 50px;
+        /* Creates the sleek pill shape */
+        padding: 12px 20px;
+        gap: 15px;
+        /* Spaces out the 6 icons perfectly */
+        z-index: 99999;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    }
+
+    /* 4. STYLE THE ICONS */
+    .mobile-dock a {
+        color: var(--text-muted);
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .mobile-dock a svg {
+        width: 100%;
+        height: 100%;
+    }
+
+    /* Hover & Active State */
+    .mobile-dock a:hover,
+    .mobile-dock a:active {
+        color: var(--accent-acid);
+        transform: translateY(-3px);
+        filter: drop-shadow(0 0 8px rgba(204, 255, 0, 0.5));
+    }
+
+    /* 5. MOVE THE SYSTEM OVERRIDE SO IT DOESN'T HIT THE DOCK */
+    .theme-toggle {
+        top: 15px !important;
+        right: 15px !important;
+        bottom: auto !important;
+        padding: 0.4rem 0.8rem 0.4rem 0.4rem !important;
+    }
+
+    /* Give the page bottom some breathing room so content isn't blocked by the dock */
+    body {
+        padding-bottom: 90px !important;
+    }
+}
