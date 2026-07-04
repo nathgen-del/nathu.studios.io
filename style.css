@@ -2934,29 +2934,33 @@ html[data-theme="light"] .cursor-ring.hover-active {
         position: fixed !important;
         top: 0 !important;
         left: 0 !important;
-        right: 0 !important; /* Anchors the right side to prevent pinching */
+        right: 0 !important;
+        /* Anchors the right side to prevent pinching */
         width: 100% !important;
         margin: 0 !important;
-        border-radius: 0 !important; /* Kills the curves causing the gap illusion */
+        border-radius: 0 !important;
+        /* Kills the curves causing the gap illusion */
         box-sizing: border-box !important;
-        padding: 1rem 0.5rem !important; /* Tighter padding for mobile screens */
+        padding: 1rem 0.5rem !important;
+        /* Tighter padding for mobile screens */
     }
 
-    /* 2. RESPONSIVE LINK STACKING (NO HAMBURGER MENU) */
     .topbar-nav ul {
         display: flex !important;
-        flex-wrap: wrap !important; /* Forces links to wrap to the next line naturally */
+        flex-wrap: wrap !important;
+        /* Forces links to wrap to the next line naturally */
         justify-content: center !important;
         align-items: center !important;
         width: 100% !important;
         margin: 0 !important;
         padding: 0.5rem 0 0 0 !important;
-        gap: 8px 12px !important; /* Adds strict, clean spacing between the wrapped links */
+        gap: 8px 12px !important;
+        /* Adds strict, clean spacing between the wrapped links */
     }
 
     /* Shrinks the text slightly so it fits perfectly on phone screens */
     .topbar-nav a {
-        font-size: 0.75rem !important; 
+        font-size: 0.75rem !important;
         padding: 4px 6px !important;
     }
 }
@@ -3302,13 +3306,16 @@ html[data-theme="light"] .cursor-ring.hover-active {
    MOBILE DOCK (HIDDEN ON DESKTOP)
    ========================================== */
 /* 3. THE FLOATING ICON DOCK */
+/* ==========================================
+   MOBILE DOCK (HIDDEN ON DESKTOP)
+   ========================================== */
 .mobile-dock {
     display: none !important;
 }
 
 @media (max-width: 850px) {
 
-     /* 1. CLEAN TOP HEADER (Logo Only, No Gaps) */
+    /* 1. CLEAN TOP HEADER (Logo Only, No Gaps) */
     .site-topbar {
         position: fixed !important;
         top: 0 !important;
@@ -3365,6 +3372,7 @@ html[data-theme="light"] .cursor-ring.hover-active {
         width: 100% !important;
         height: 100% !important;
     }
+
     /* Hover & Active State */
     .mobile-dock a:hover,
     .mobile-dock a:active {
@@ -3385,4 +3393,84 @@ html[data-theme="light"] .cursor-ring.hover-active {
     body {
         padding-bottom: 90px !important;
     }
+}
+
+
+
+/* ==========================================
+   RESUME BENTO ACTION BLOCK (SPACING FIXED)
+   ========================================== */
+.resume-action-card {
+    grid-column: span 12;
+    border-color: var(--accent-acid);
+    background: linear-gradient(180deg, rgba(204, 255, 0, 0.05) 0%, transparent 100%);
+    text-align: center;
+    /* Reduced top/bottom padding from 3rem to 2rem to fix the massive height */
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3rem;
+}
+
+.resume-action-card h3 {
+    margin-bottom: 0.5rem;
+    /* Pulls the title closer to the paragraph */
+}
+
+.resume-action-card p {
+    margin: 0 auto;
+    /* Centers the paragraph and removes uneven default margins */
+    max-width: 600px;
+    /* Keeps the text on one or two clean lines */
+}
+
+.action-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    /* Reduced from 2rem to 1.5rem to pull the buttons closer to the text */
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+}
+
+/* Alternate style for the View button to distinguish it from the Download button */
+.btn-view {
+    background: transparent;
+    color: var(--text-main);
+    border-color: var(--text-main);
+}
+
+.btn-view:hover {
+    border-color: var(--accent-acid);
+    color: var(--accent-acid);
+    box-shadow: 0 0 15px rgba(204, 255, 0, 0.15);
+}
+
+/* ==========================================
+   RESUME VIEWER MODAL WRAPPER (SIZE FIXED)
+   ========================================== */
+.resume-wrapper {
+    width: 90vw;
+    /* Takes up 90% of the screen width */
+    max-width: 1000px;
+    /* Increased max-width so it's wider on desktop */
+    height: 85vh;
+    /* Forces it to be 85% of the screen height */
+    border: 2px solid var(--accent-acid);
+    box-shadow: 0 0 40px rgba(204, 255, 0, 0.15);
+    border-radius: var(--radius-ui);
+    background: #222;
+    /* Dark background behind the PDF */
+    pointer-events: auto;
+    overflow: hidden;
+    /* Prevents double scrollbars */
+}
+
+.resume-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
 }
