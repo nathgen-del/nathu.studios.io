@@ -52,7 +52,7 @@
         </nav>
     </header>
 
-         <!-- MOBILE FLOATING DOCK (Hidden on Laptops) -->
+    <!-- MOBILE FLOATING DOCK (Hidden on Laptops) -->
     <div class="mobile-dock">
         <!-- 1. Home (Grid/Dashboard) -->
         <a href="#home" title="Home">
@@ -111,6 +111,7 @@
             </svg>
         </a>
     </div>
+
     <main>
         <section id="home" class="hero">
             <canvas id="hero-canvas" class="hero-canvas"></canvas>
@@ -230,6 +231,17 @@
                             <p>HTML, CSS, JavaScript, website editing, and frontend development.</p>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <div class="bento-card resume-action-card fade-in">
+                <span class="tools-label">STANDARD FORMAT</span>
+                <h3>View or Download Resume</h3>
+                <p>Access the formal, single-page document outlining my complete academic and freelance history.</p>
+
+                <div class="action-buttons">
+                    <button onclick="openResumeModal()" class="btn btn-view">[ VIEW RESUME ]</button>
+                    <a href="Resume.pdf" download="Nath_Genato_Resume.pdf" class="btn">[ DOWNLOAD PDF ↗ ]</a>
                 </div>
             </div>
         </section>
@@ -811,6 +823,18 @@
             <!-- The zoomable image container -->
             <div class="cert-img-wrapper" onclick="toggleZoom(event)">
                 <img id="cert-modal-img" src="" alt="Verified Credential">
+            </div>
+        </div>
+    </div>
+
+    <div id="resume-modal" class="cert-modal" onclick="closeResumeModal(event)">
+        <div class="cert-modal-close" id="resume-close-btn">[ X ] Click to Close</div>
+
+        <div class="cert-modal-content">
+            <h3 class="cert-modal-title">SYSTEM_LOG // NATH_RESUME</h3>
+
+            <div class="resume-wrapper">
+                <iframe class="resume-iframe" src="Resume.pdf#view=FitH" frameborder="0"></iframe>
             </div>
         </div>
     </div>
