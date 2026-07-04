@@ -456,6 +456,26 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(updateSystemClock, 1000);
 });
 
+// ==========================================
+// RESUME MODAL VIEWER
+// ==========================================
+window.openResumeModal = function () {
+    const modal = document.getElementById('resume-modal');
+    if (modal) {
+        modal.classList.add('active');
+        document.body.classList.add('no-scroll');
+    } else {
+        console.error("ERROR: Could not find <div id='resume-modal'> in the HTML.");
+    }
+};
 
-
+window.closeResumeModal = function (event) {
+    if (event.target.id === 'resume-modal' || event.target.id === 'resume-close-btn') {
+        const modal = document.getElementById('resume-modal');
+        if (modal) {
+            modal.classList.remove('active');
+            document.body.classList.remove('no-scroll');
+        }
+    }
+};
 
